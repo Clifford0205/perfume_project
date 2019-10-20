@@ -1,0 +1,177 @@
+@mixin lg {
+    @media (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (max-width: 576px) {
+        @content;
+    }
+}
+
+
+.ProductDetail {
+
+
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            list-style: none;
+        }
+    }
+
+    p {
+        margin: 0
+    }
+
+    .top-area {
+        margin-bottom: 100px;
+
+        .casetitle {
+            padding-top: 120px;
+        }
+    }
+
+    .gallary {
+        width: 50px;
+
+        ul {
+            padding: 0;
+            margin: 0;
+
+            li {
+                list-style: none;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    p {
+        margin: 0
+    }
+
+    .big-img {
+        width: 500px;
+        // height: 320px;
+
+        img {
+            // width: 70%;
+            height: 300px;
+        }
+    }
+
+
+    .choose-title {
+
+        .the-title {
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .active {
+            border: 1px solid transparent;
+            border-color: #dee2e6 #dee2e6 #fff;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+            font-weight: bold;
+            color: #000;
+        }
+    }
+
+    .thehide {
+        display: none;
+    }
+
+    .thehide.show {
+        display: block;
+    }
+
+    .describe-text {
+        p {
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+
+    .flavor-text {
+        p {
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+
+    .message-board {
+        ul {
+            background-color: #eee;
+            padding: 30px;
+
+            li {
+                background-color: #dddddd;
+                padding: 15px;
+                margin-top: 15px;
+
+                .little-input {
+                    resize: none;
+                    height: 40px;
+                }
+
+                .little-ul {
+                    background-color: #dddddd;
+                    padding: 0;
+
+                    .little-li {
+                        background-color: #dddddd;
+                        padding: 0;
+                    }
+                }
+            }
+        }
+
+        .message-input {
+            resize: none;
+            height: 80px;
+        }
+    }
+
+
+    .bottom-area {
+        background: -moz-linear-gradient(-45deg, #0aacdd 1%, #27d9e0 36%, #1a79cb 100%);
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, #0aacdd 1%, #27d9e0 36%, #1a79cb 100%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, #0aacdd 1%, #27d9e0 36%, #1a79cb 100%);
+
+
+    }
+
+    .bg-border {
+        height: 40px;
+        width: 120px;
+        border: 1px solid #ffffff;
+        border-radius: 5rem;
+
+    }
+
+    .sendbtn {
+        border-radius: 5rem;
+        width: 120px;
+        background-color: rgba(255, 255, 255, 0.6);
+        margin-left: -5px;
+        margin-top: -3px;
+        color: #1A79CB;
+    }
+}

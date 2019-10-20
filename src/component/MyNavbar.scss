@@ -1,0 +1,217 @@
+@mixin xl {
+    @media (max-width: 1200px) {
+        @content;
+    }
+}
+
+
+@mixin lg {
+    @media (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (max-width: 576px) {
+        @content;
+    }
+}
+
+
+
+.MyNav {
+    position: fixed;
+    z-index: 500;
+    // left: 50%;
+    // transform: translateX(-50%);
+    width: 100%;
+    background: rgba(16, 16, 16, 0.95);
+    color: #ffffff;
+
+
+    @include md {
+        background: rgba(16, 16, 16, 0.35);
+    }
+
+    .forpos {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .logo {
+            position: absolute;
+            height: 50px;
+            width: 150px;
+            top: 25%;
+            left: 15%;
+
+            @include xl {
+                top: 25%;
+                left: 5%;
+            }
+
+            @include lg {
+                top: 25%;
+                left: 0%;
+                width: 120px;
+            }
+
+            @include md {
+                top: 5%;
+                left: 10%;
+                width: 120px;
+            }
+
+        }
+    }
+
+
+
+    .transition {
+        transition: 0.4s;
+    }
+
+    .hanburger {
+        display: none;
+
+        @include md {
+            display: block;
+        }
+
+        .hanburger-icon {
+            display: block;
+            height: 50px;
+            width: 50px;
+            margin-left: auto;
+        }
+
+        .bar {
+            width: 36px;
+            height: 6px;
+            background: #666;
+            margin: 6px 0;
+            border-radius: 2px;
+
+        }
+
+
+    }
+
+    .active .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-9px, 7px);
+        transform: rotate(-45deg) translate(-9px, 7px);
+    }
+
+    .active .bar2 {
+        opacity: 0;
+    }
+
+    .active .bar3 {
+        -webkit-transform: rotate(45deg) translate(-9px, -8px);
+        transform: rotate(45deg) translate(-9px, -8px);
+    }
+
+    .my-nav-all {
+        padding-top: 30px;
+        padding-bottom: 30px;
+
+        @include md {
+            max-height: 0;
+            overflow: hidden;
+            position: fixed;
+            padding: 0;
+
+            z-index: 99;
+            right: 0;
+            left: 0;
+        }
+
+        .my-navbar-nav {
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+
+
+            @include md {
+                display: block;
+
+            }
+
+            li {
+                margin-left: 25px;
+                margin-right: 25px;
+
+                white-space: nowrap;
+                cursor: pointer;
+
+                @include md {
+                    text-align: center;
+                    background: rgba(16, 16, 16, 0.95);
+
+                    margin: 0;
+                }
+
+                a {
+                    color: #ffffff;
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            .the-drop {
+                position: relative;
+
+                a {
+                    color: #ffffff;
+                    text-decoration: none;
+                }
+
+                .my-menu {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    max-height: 0;
+                    overflow: hidden;
+                    background: rgba(16, 16, 16, 0.95);
+
+                    @include md {
+                        position: static;
+                    }
+
+                    ul {
+                        list-style: none;
+                        padding-inline-start: 0;
+
+                        li {
+                            margin-left: 0;
+                            margin-right: 0;
+                            text-align: center;
+                        }
+                    }
+                }
+
+                .my-menu.show {
+                    max-height: 300px;
+                }
+            }
+        }
+    }
+
+    .my-nav-all.show {
+        max-height: 800px;
+
+        @include md {}
+    }
+
+
+}

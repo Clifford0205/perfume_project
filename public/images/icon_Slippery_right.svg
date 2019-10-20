@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10.324" height="20.648" viewBox="0 0 10.324 20.648">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="10.324" height="20.648" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="icon_Slippery_right" clip-path="url(#clip-path)">
+    <path id="路径_177" data-name="路径 177" d="M485.2,950h-3.255l-5.862,5.862L470.222,950h-3.255l9.117,9.117Z" transform="translate(-949.5 486.408) rotate(-90)" fill="none" stroke="#989898" stroke-width="1"/>
+  </g>
+</svg>

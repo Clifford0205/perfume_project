@@ -1,0 +1,18 @@
+.goback {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+
+    .arrow {
+        background-image: url(/images/arrow_left.svg);
+        background-repeat: no-repeat;
+        width: 25px;
+        height: 30px;
+    }
+
+    p {
+        margin-top: 2px;
+        color: #ffffff;
+    }
+}

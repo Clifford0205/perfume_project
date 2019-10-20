@@ -1,0 +1,36 @@
+.Bottomform {
+
+    width: 60%;
+
+    input {
+        border-radius: 3rem;
+        border: 1px solid #bbbbbb;
+        padding: 5px;
+        width: 100%;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .bg-border {
+        height: 40px;
+        width: 120px;
+        border: 1px solid #6d7473;
+        border-radius: 5rem;
+
+    }
+
+    .sendbtn {
+        border: 1px solid #000000;
+        border-radius: 5rem;
+        width: 120px;
+        background-color: #ffffff;
+        margin-left: -5px;
+        margin-top: -3px;
+    }
+
+
+
+
+}

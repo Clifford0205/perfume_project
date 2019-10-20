@@ -1,0 +1,398 @@
+@mixin md {
+    @media(max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin lg {
+    @media(max-width: 992px) {
+        @content;
+    }
+}
+
+
+.LandingPage {
+    font-family: Noto Sans CJK TC;
+    // position: absolute;
+    top: 0;
+    z-index: -100;
+    color: #969696;
+    background: url(/images/img_bg3.png);
+    transition: 3s;
+
+    .one-page {
+        height: 100vh;
+    }
+
+    .slider-img {
+        height: 100vh;
+        width: 100vw;
+        object-fit: cover;
+    }
+
+
+    .transition {
+        transition: 0.4s;
+    }
+
+    .theVision {
+        min-height: 100vh;
+
+        .transition {
+            transition: width 2s;
+        }
+
+        .fp-tableCell {
+            display: unset;
+            vertical-align: unset;
+        }
+
+        .bigLogo {
+            opacity: 0.2;
+            margin-bottom: 50px;
+        }
+
+        .first-col {
+            padding: 0;
+
+            .imgarea {
+                height: 100vh;
+
+
+
+                .carousel {
+                    .carousel-caption {
+                        bottom: 35px;
+                    }
+
+                    .carousel-indicators {
+                        bottom: 30px;
+                    }
+                }
+
+            }
+        }
+
+        .arrowDown {
+            height: 10vh;
+        }
+
+
+
+
+        .text-part1,
+        .text-part2 {
+            font-weight: 900;
+            font-size: 2.5em;
+        }
+
+        .text-part1 .letter,
+        .text-part2 .letter {
+            display: inline-block;
+            line-height: 1em;
+        }
+    }
+
+
+    .videopage {
+        color: #000000;
+        height: 100vh;
+        // margin-top: -40px;
+
+        .content {
+            height: 100%;
+
+            .col {
+                padding: 0;
+
+                .forpose {
+                    position: relative;
+
+                    .title {
+                        position: absolute;
+                        top: 43%;
+                        width: 100%;
+
+                        h3 {
+                            color: #ffffff;
+                            text-align: center;
+                            font-size: 3rem;
+
+
+                        }
+                    }
+
+                    video {
+                        height: 100vh;
+                        width: 100vw;
+                        object-fit: cover;
+                    }
+
+                }
+            }
+
+
+
+
+        }
+
+
+        .page2-textArea {
+
+
+            .page2-title {
+                font-size: 25pt;
+
+                span {
+                    background-color: #FFBC60;
+                    border-radius: 3.5rem;
+                }
+
+                @include md {
+                    font-size: 18pt;
+                }
+            }
+
+            .aboutArticle {
+                width: 70%;
+                font-size: 18pt;
+                line-height: 2rem;
+                color: #818181;
+                max-height: 500px;
+                overflow: hidden;
+            }
+        }
+
+
+    }
+
+    .aboutus {
+        color: #000000;
+        height: 100vh;
+        margin-top: -40px;
+
+        .content {
+            height: 100%;
+
+            h2,
+            img,
+            p {
+                opacity: 0;
+                transform: translate(0, 20px);
+                transition: 3s;
+            }
+        }
+
+
+        .page3-textArea {
+
+
+            .page2-title {
+                font-size: 25pt;
+
+                span {
+                    background-color: #FFBC60;
+                    border-radius: 3.5rem;
+                }
+
+                @include md {
+                    font-size: 18pt;
+                }
+            }
+
+            .aboutArticle {
+                width: 70%;
+                font-size: 18pt;
+                line-height: 2rem;
+                color: #818181;
+            }
+        }
+
+
+    }
+
+
+    .product {
+        color: #000000;
+        height: 100vh;
+        margin-top: -40px;
+
+        .content {
+            height: 100%;
+
+            h2,
+            .col {
+                opacity: 0;
+                transform: translate(0, 20px);
+                transition: 3s;
+            }
+
+            .product-area {
+                img {
+                    width: 250px;
+
+                    @include lg {
+                        width: 200px;
+                    }
+
+                    @include md {
+                        width: 150px;
+                    }
+
+                }
+
+                a {
+                    color: #000000;
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+
+
+
+
+
+        }
+
+        .hidenow {
+            max-width: 0;
+            overflow: hidden;
+            margin: 0 !important;
+        }
+
+
+    }
+
+    .contact-page {
+        color: #000000;
+        height: 100vh;
+        margin-top: -40px;
+
+        .content {
+            height: 100%;
+
+            .title {
+                background-color: #FFBC60;
+                border-radius: 3.5rem;
+            }
+
+            .page5-title {
+                font-size: 25pt;
+
+                span {
+                    background-color: #FFBC60;
+                    border-radius: 3.5rem;
+                }
+
+                @include md {
+                    font-size: 18pt;
+                }
+            }
+
+
+            #map {
+                height: 300px;
+                /* The height is 400 pixels */
+                width: 60%;
+
+                /* The width is the width of the web page */
+                .googleMap {
+                    height: 100%;
+                }
+
+                @include md {
+                    height: 150px;
+                }
+
+            }
+
+
+        }
+    }
+
+}
+
+
+.fp-viewing-secondPage {
+    .LandingPage {
+        transition: 3s;
+
+        .videopage {
+            .content {
+
+                h2,
+                p {
+                    opacity: 1;
+                    transform: translate(0, -10px);
+                    transition: 5s;
+                }
+
+                // iframe {
+                //     height: 100vh;
+                //     width: 100vw;
+                // }
+            }
+        }
+    }
+}
+
+.fp-viewing-thirdPage {
+    .LandingPage {
+        transition: 3s;
+
+        .aboutus {
+            .content {
+
+                h2,
+                img,
+                p {
+                    opacity: 1;
+                    transform: translate(0, -10px);
+                    transition: 5s;
+                }
+            }
+        }
+    }
+}
+
+.fp-viewing-fourthPage {
+    .LandingPage {
+        transition: 3s;
+
+        .product {
+            .content {
+
+                h2,
+                .col,
+                    {
+                    opacity: 1;
+                    transform: translate(0, -10px);
+                    transition: 5s;
+                }
+            }
+        }
+    }
+}
+
+body.clickednow {
+    .LandingPage {
+        .organs-page {
+            .content {
+                .page4-title {
+                    // opacity: 0;
+                    max-height: 0;
+                    overflow: hidden;
+                    font-size: 0;
+
+                    img {
+                        height: 0;
+                    }
+
+                }
+            }
+        }
+    }
+
+}

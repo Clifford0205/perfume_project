@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50.726" height="38.884" viewBox="0 0 50.726 38.884">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="50.726" height="38.884" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="btm_hous" clip-path="url(#clip-path)">
+    <g id="组_96" data-name="组 96" transform="translate(-216.187 -91.388)">
+      <path id="路径_160" data-name="路径 160" d="M258.314,118.4l-.743.742-2.68-2.679c-.27.32-.548.638-.85.94s-.619.579-.94.85l2.68,2.68-.743.742,7.251,7.251a2.316,2.316,0,0,0,3.275,0h0a2.316,2.316,0,0,0,0-3.276Z" fill="none" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+    <circle id="椭圆_1393" data-name="椭圆 1393" cx="12.975" cy="12.975" r="12.975" transform="translate(13.91 2.068)" stroke-width="1" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle id="椭圆_1394" data-name="椭圆 1394" cx="1.813" cy="1.813" r="1.813" transform="translate(26.313 11.412)" stroke-width="1" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle id="椭圆_1395" data-name="椭圆 1395" cx="1.547" cy="1.547" r="1.547" transform="translate(32.233 6.944)" stroke-width="1" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle id="椭圆_1396" data-name="椭圆 1396" cx="2.124" cy="2.124" r="2.124" transform="translate(16.075 13.746)" stroke-width="1" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle id="椭圆_1397" data-name="椭圆 1397" cx="2.559" cy="2.559" r="2.559" transform="translate(30.48 18.324)" stroke-width="1" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle id="椭圆_1398" data-name="椭圆 1398" cx="0.568" cy="0.568" r="0.568" transform="translate(24.213 22.791)" stroke-width="1" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle id="椭圆_1399" data-name="椭圆 1399" cx="0.568" cy="0.568" r="0.568" transform="translate(22.702 7.448)" stroke-width="1" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path id="路径_163" data-name="路径 163" d="M232.676,116.827a14.7,14.7,0,0,1,0-20.793c.321-.321.658-.619,1-.9l-1.284-1.252L216.687,109.2H220.3v16.9h24.177v-5.03A14.669,14.669,0,0,1,232.676,116.827Z" transform="translate(-216.187 -91.388)" fill="none" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <circle id="椭圆_1408" data-name="椭圆 1408" cx="14.542" cy="14.542" r="14.542" transform="translate(12.343 0.5)" stroke-width="1" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>

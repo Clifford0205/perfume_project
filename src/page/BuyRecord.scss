@@ -1,0 +1,33 @@
+@mixin lg {
+    @media (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (max-width: 576px) {
+        @content;
+    }
+}
+
+.BuyRecord {
+    ul {
+        padding: 0;
+
+        li {
+            list-style: none;
+        }
+    }
+
+    .single-order {
+        border: 2px solid #a0a0a0;
+        margin-top: 15px;
+        padding: 15px;
+    }
+}

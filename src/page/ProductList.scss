@@ -1,0 +1,71 @@
+.ProductList {
+    .classification {
+        p {
+            display: inline-block;
+        }
+
+        .all {
+            background-image: url(/images/btm_all.svg);
+            background-repeat: no-repeat;
+            width: 60px;
+            height: 60px;
+        }
+
+        .all.active {
+            background-image: url(/images/btm_all_hover.svg) !important;
+        }
+
+
+        .active {
+            color: #49d3f1;
+        }
+
+        .filter {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+
+
+    }
+
+    .lotsCase {
+        a {
+            color: #000000;
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            .linkimg {
+                // height: 250px;
+            }
+
+            .linktitle {
+                text-align: center;
+
+
+            }
+
+            .linktext {
+                height: 1.5rem;
+                text-align: center;
+                overflow: hidden;
+            }
+        }
+    }
+
+    .pagination {
+
+        li {
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .previous {}
+
+    }
+
+
+}

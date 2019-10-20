@@ -1,0 +1,63 @@
+@mixin lg {
+    @media (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (max-width: 576px) {
+        @content;
+    }
+}
+
+.ShoppingCart {
+    ul {
+        padding: 0;
+
+        li {
+            list-style: none;
+        }
+    }
+
+    .choose-title {
+
+        .the-title {
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .active {
+            border: 1px solid transparent;
+            border-color: #dee2e6 #dee2e6 #fff;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+            font-weight: bold;
+            color: #000;
+        }
+    }
+
+    .thehide {
+        display: none;
+    }
+
+    .thehide.show {
+        display: block;
+    }
+
+    .cart {
+        img {
+            width: 150px;
+        }
+
+        .cancel {
+            width: 25px;
+            height: 25px;
+            padding: 0;
+        }
+    }
+}

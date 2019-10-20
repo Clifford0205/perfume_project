@@ -1,0 +1,22 @@
+.myLanguage {
+    font-family: Noto Sans CJK TC;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #2F2F2F;
+    color: #ffffff;
+    height: 40px;
+
+    .switch {
+        width: 120px;
+        cursor: pointer;
+    }
+
+
+    .active {
+        background-color: #a9c6a8;
+        border-radius: 25px;
+
+    }
+}
