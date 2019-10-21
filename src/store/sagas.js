@@ -222,10 +222,10 @@ function* editPasswordAction(newItem) {
 //大留言
 function* bigMessageAction(newItem) {
   yield; // console.log(newItem.big_message.message);
-  const data = newItem.big_message.message;
-  // console.log(data);
+  const data = newItem.big_message.message.message;
+  console.log(data);
   const ptid = newItem.big_message.product_id;
-  const response = yield fetch('http://localhost:5555/products/' + ptid, {
+  const response = yield fetch('http://localhost:5000/products/bigmsg' + ptid, {
     method: 'PATCH',
     body: JSON.stringify(data),
     headers: new Headers({
@@ -233,7 +233,9 @@ function* bigMessageAction(newItem) {
       'Content-Type': 'application/json',
     }),
   });
-  // console.log(jsonObject);
+  const jsonObject = yield response.json();
+  console.log(jsonObject);
+
   yield getProductsInstate();
   let action = '';
   action = cleanBigMessage();

@@ -123,7 +123,7 @@ class ProductDetail extends React.Component {
             {
               text: member + ':' + this.state.Big_message,
               id: 1,
-              little_message: [],
+              little_message: '[]',
             },
           ],
         },
@@ -148,12 +148,7 @@ class ProductDetail extends React.Component {
             {
               text: member + ':' + this.state.Big_message,
               id: lastid + 1,
-              little_message: [
-                {
-                  text: '',
-                  id: 1,
-                },
-              ],
+              little_message: [],
             },
           ],
         },
