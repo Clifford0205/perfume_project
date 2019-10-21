@@ -38,33 +38,35 @@ class MemberEdit extends React.Component {
 
   handleMemberModify = () => {
     const edit_data = {
-      m_mail: this.state.my_mail,
-      m_password: this.state.my_pswd,
-      m_name: this.state.my_name,
-      m_mobile: this.state.my_mobile,
-      m_birthday: this.state.my_birthday,
-      shopping_cart: this.state.my_cart,
-      buy_record: this.state.my_buy_record,
+      edit_data: {
+        m_mail: this.state.my_mail,
+        m_password: this.state.my_pswd,
+        m_name: this.state.my_name,
+        m_mobile: this.state.my_mobile,
+        m_birthday: this.state.my_birthday,
+        shopping_cart: JSON.stringify(this.state.my_cart),
+        buy_record: JSON.stringify(this.state.my_buy_record),
+      },
       id: this.state.my_id,
     };
 
-    //手機號碼驗證
-    let mobile_pattern = /^09\d{2}-?\d{3}-?\d{3}$/;
-    // console.log(document.querySelector('.m_mobile').value);
-    if (!mobile_pattern.test(this.state.my_mobile)) {
-      document.querySelector('.m_mobile').style.borderColor = 'red';
-      document.querySelector('.m_mobileHelp').innerHTML =
-        '請填寫正確的手機號碼!';
-      return;
-    }
+    // //手機號碼驗證
+    // let mobile_pattern = /^09\d{2}-?\d{3}-?\d{3}$/;
+    // // console.log(document.querySelector('.m_mobile').value);
+    // if (!mobile_pattern.test(this.state.my_mobile)) {
+    //   document.querySelector('.m_mobile').style.borderColor = 'red';
+    //   document.querySelector('.m_mobileHelp').innerHTML =
+    //     '請填寫正確的手機號碼!';
+    //   return;
+    // }
 
-    //Email驗證
-    let email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    if (!email_pattern.test(this.state.my_mail)) {
-      document.querySelector('.m_mail').style.borderColor = 'red';
-      document.querySelector('.m_mailHelp').innerHTML = '請填寫正確的E-mail!';
-      return;
-    }
+    // //Email驗證
+    // let email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    // if (!email_pattern.test(this.state.my_mail)) {
+    //   document.querySelector('.m_mail').style.borderColor = 'red';
+    //   document.querySelector('.m_mailHelp').innerHTML = '請填寫正確的E-mail!';
+    //   return;
+    // }
 
     const action = editMemberAction(edit_data);
     // console.log(action);
@@ -120,7 +122,7 @@ class MemberEdit extends React.Component {
   };
 
   render() {
-    // console.log(this.state);
+    console.log(this.state);
     return (
       <>
         <MyNavbar />
@@ -249,7 +251,7 @@ class MemberEdit extends React.Component {
           </Container>
         </Container>
 
-        <Language />
+        {/* <Language /> */}
       </>
     );
   }

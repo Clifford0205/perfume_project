@@ -24,7 +24,7 @@ import {
   cleanBigMessage,
 } from './actionCreators';
 
-//窩窩專案
+//專案
 
 //拿到首頁文章
 
@@ -77,7 +77,7 @@ function* getProductsInstate() {
   }
 }
 
-//拿到所有會員資料
+//拿到所有會員資料 改
 function* getAllMemberAction() {
   try {
     const response = yield fetch('http://localhost:5000/memberdata ', {
@@ -99,7 +99,7 @@ function* getAllMemberAction() {
   }
 }
 
-//會員註冊
+//會員註冊 改
 function* addMemberAction(newItem) {
   // console.log(newItem.m_data);
   try {
@@ -126,28 +126,25 @@ function* addMemberAction(newItem) {
   }
 }
 
-//會員登入
+//會員登入 改
 function* MemberLogin(newItem) {
   try {
-    const mail = newItem.login_data.login_email;
-    const pswd = newItem.login_data.login_password;
-    const response = yield fetch(
-      'http://localhost:5555/memberdata?m_mail=' + mail + '&m_password=' + pswd,
-      {
-        method: 'GET',
-        headers: new Headers({
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        }),
-      }
-    );
+    const data = newItem.login_data;
+    const response = yield fetch('http://localhost:5000/login', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    });
     // if (!response.ok) throw new Error(response.statusText);
     const jsonObject = yield response.json();
-    yield; // console.log(jsonObject);
-    if (jsonObject.length !== 0) {
+    yield console.log(jsonObject);
+    if (jsonObject.passed) {
       alert('登入成功');
-      // console.log(jsonObject[0]);
-      localStorage.setItem('user', JSON.stringify(jsonObject[0]));
+      // console.log(jsonObject.body[0]);
+      localStorage.setItem('user', JSON.stringify(jsonObject.body[0]));
       // console.log(JSON.parse(localStorage.getItem('user')));
       let this_user = JSON.parse(localStorage.getItem('user'));
       // console.log(this_user);
@@ -168,12 +165,12 @@ function* MemberLogin(newItem) {
 function* editMemberaction(newItem) {
   yield; // console.log(newItem.edit_data);
   const member_id = newItem.edit_data.id;
-  const data = newItem.edit_data;
-  // console.log(member_id);
+  const data = newItem.edit_data.edit_data;
+  console.log(newItem);
   // console.log(data);
 
   const response = yield fetch(
-    'http://localhost:5555/memberdata/' + member_id,
+    'http://localhost:5000/memberdata/edit/' + member_id,
     {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -184,14 +181,19 @@ function* editMemberaction(newItem) {
     }
   );
   const jsonObject = yield response.json();
-  // console.log(jsonObject);
-  localStorage.setItem('user', JSON.stringify(jsonObject));
-  // console.log(JSON.parse(localStorage.getItem('user')));
-  let this_user = JSON.parse(localStorage.getItem('user'));
-  // console.log(this_user);
-  yield alert('資料修改成功');
-  const action = checkLoginState(this_user);
-  yield put(action);
+  console.log(jsonObject);
+
+  if (jsonObject.passed) {
+    localStorage.setItem('user', JSON.stringify(jsonObject.body));
+    // console.log(JSON.parse(localStorage.getItem('user')));
+    let this_user = JSON.parse(localStorage.getItem('user'));
+    // console.log(this_user);
+    yield alert('資料修改成功');
+    const action = checkLoginState(this_user);
+    yield put(action);
+  } else {
+    yield alert('資料沒有修改');
+  }
 }
 
 //修改密碼
@@ -200,7 +202,7 @@ function* editPasswordAction(newItem) {
   const member_id = newItem.edit_pswd.id;
   const data = newItem.edit_pswd;
   const response = yield fetch(
-    'http://localhost:5555/memberdata/' + member_id,
+    'http://localhost:5000/memberdata/' + member_id,
     {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -227,14 +229,17 @@ function* bigMessageAction(newItem) {
   const data = newItem.big_message.message.message;
   console.log(data);
   const ptid = newItem.big_message.product_id;
-  const response = yield fetch('http://localhost:5000/products/bigmsg' + ptid, {
-    method: 'PATCH',
-    body: JSON.stringify(data),
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }),
-  });
+  const response = yield fetch(
+    'http://localhost:5000/products/bigmsg/' + ptid,
+    {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }
+  );
   const jsonObject = yield response.json();
   console.log(jsonObject);
 
@@ -251,7 +256,7 @@ function* littleMsg(newItem) {
 
   const ptid = newItem.little_message.product_id;
   const response = yield fetch(
-    'http://localhost:5000/products/littlemsg' + ptid,
+    'http://localhost:5000/products/littlemsg/' + ptid,
     {
       method: 'PATCH',
       body: JSON.stringify(data),

@@ -196,7 +196,7 @@ export default (state = defaultState, action) => {
     newState.my_mobile = action.userdata.m_mobile;
     newState.my_birthday = action.userdata.m_birthday;
     newState.my_cart = action.userdata.shopping_cart;
-    newState.my_id = action.userdata.id;
+    newState.my_id = action.userdata.m_sid;
     newState.my_buy_record = action.userdata.buy_record;
     if (action.userdata.shopping_cart.length !== 0) {
       let l_total = action.userdata.shopping_cart.map(
