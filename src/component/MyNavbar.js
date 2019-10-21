@@ -16,6 +16,7 @@ import {
   logoutModalShowAction,
   logoutModalCloseAction,
   checkLoginState,
+  getAllmemberAction,
 } from '../store/actionCreators.js';
 
 import { FaAngleDown } from 'react-icons/fa';
@@ -67,7 +68,10 @@ class MyNavbar extends React.Component {
   // 開啟註冊視窗
   hanldleOpenRegister = () => {
     // console.log(this.state);
-    const action = memberModalShowAction();
+    let action = '';
+    action = memberModalShowAction();
+    store.dispatch(action);
+    action = getAllmemberAction();
     store.dispatch(action);
   };
 
@@ -103,7 +107,8 @@ class MyNavbar extends React.Component {
   };
 
   render() {
-    // console.log(this.props.match.url === '/');
+    //  console.log(this.props.match.url === '/');
+    // console.log(this.state);
     return (
       <>
         <div className="MyNav">

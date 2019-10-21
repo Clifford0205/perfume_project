@@ -157,7 +157,6 @@
       "tag": "flower",
       "message": []
     },
-
     {
       "imglist": [
         {
@@ -1514,8 +1513,62 @@
       "m_name": "KKK",
       "m_mobile": "0953830559",
       "m_birthday": "2019-10-08",
-      "buy_record": [],
-      "shopping_cart": [],
+      "buy_record": [
+        {
+          "time": "2019/10/19 11:54",
+          "id": 1,
+          "product": [
+            {
+              "name": "紫渙",
+              "amount": 3,
+              "price": 6990,
+              "product_id": 2014
+            }
+          ],
+          "total": 20970,
+          "orderer": "KKK",
+          "orderer_mail": "12345@gmail.com",
+          "recipient_name": "KKK",
+          "recipient_mobile": "0953830559",
+          "recipient_mail": "12345@gmail.com",
+          "delivery_city": "雲林縣",
+          "delivery_town": "莿桐鄉: 647",
+          "recipient_road": "fffffff",
+          "pay_way2": "貨到付款"
+        },
+        {
+          "time": "2019/10/19 11:55",
+          "id": 2,
+          "product": [
+            {
+              "name": "紫渙",
+              "amount": 3,
+              "price": 6990,
+              "product_id": 2014
+            }
+          ],
+          "total": 20970,
+          "orderer": "KKK",
+          "orderer_mail": "12345@gmail.com",
+          "recipient_name": "KKK",
+          "recipient_mobile": "0953830559",
+          "recipient_mail": "12345@gmail.com",
+          "delivery_city": "屏東縣",
+          "delivery_town": "萬巒鄉: 923",
+          "recipient_road": "fffffff",
+          "pay_way2": "信用卡"
+        }
+      ],
+      "shopping_cart": [
+        {
+          "product_id": 2003,
+          "product_name": "彼此",
+          "amount": 6,
+          "id": 1,
+          "price": "6990",
+          "img": "https://shoplineimg.com/5cc80df915c071000101084d/5d3ac4d0220c1400146be87a/600x.webp?source_format=png"
+        }
+      ],
       "id": 7
     }
   ]

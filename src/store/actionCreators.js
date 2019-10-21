@@ -8,6 +8,7 @@ import {
   PRODUCT_IN_LIST,
   PAGE_CHANGE,
   MEMBER_REGISTER,
+  MEMBER_IN_LIST,
   REGISTER_MODAL_SHOW,
   REGISTER_MODAL_CLOSE,
   LOGIN_MODAL_SHOW,
@@ -40,6 +41,11 @@ import {
 } from './actionTypes.js';
 
 //專案
+
+export const memberInListAction = data => ({
+  type: MEMBER_IN_LIST,
+  data,
+});
 
 export const getAllmemberAction = () => ({
   type: GET_ALL_MEMBER,

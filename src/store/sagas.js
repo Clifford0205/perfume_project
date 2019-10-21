@@ -17,6 +17,7 @@ import {
   cleanInputAction,
   ProductInListActopn,
   memberModalCloseAction,
+  memberInListAction,
   checkLoginState,
   loginModalCloseAction,
   totalZeroAction,
@@ -51,7 +52,7 @@ function* saveclientmessage(newItem) {
   }
 }
 
-//拿到商品資料
+//拿到商品資料 改
 function* getProductsInstate() {
   try {
     const response = yield fetch('http://localhost:5000/products ', {
@@ -79,7 +80,7 @@ function* getProductsInstate() {
 //拿到所有會員資料
 function* getAllMemberAction() {
   try {
-    const response = yield fetch('http://localhost:5555/memberdata ', {
+    const response = yield fetch('http://localhost:5000/memberdata ', {
       method: 'GET',
       headers: new Headers({
         Accept: 'application/json',
@@ -87,9 +88,10 @@ function* getAllMemberAction() {
       }),
     });
     // if (!response.ok) throw new Error(response.statusText);
-    const jsonObject = yield response.json();
 
-    const action = ProductInListActopn(jsonObject);
+    const jsonObject = yield response.json();
+    console.log(jsonObject);
+    const action = memberInListAction(jsonObject);
     // console.log(action);
     yield put(action);
   } catch (e) {
@@ -102,7 +104,7 @@ function* addMemberAction(newItem) {
   // console.log(newItem.m_data);
   try {
     const data = newItem.m_data;
-    const response = yield fetch('http://localhost:5555/memberdata', {
+    const response = yield fetch('http://localhost:5000/memberdata', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({
@@ -219,7 +221,7 @@ function* editPasswordAction(newItem) {
   yield put(action);
 }
 
-//大留言
+//大留言 改
 function* bigMessageAction(newItem) {
   yield; // console.log(newItem.big_message.message);
   const data = newItem.big_message.message.message;
@@ -242,30 +244,33 @@ function* bigMessageAction(newItem) {
   yield put(action);
 }
 
-//小留言
+//小留言 改
 function* littleMsg(newItem) {
-  const data = newItem.little_message.message;
-  yield; // console.log(data);
+  const data = newItem.little_message.message.message;
+  yield console.log(data);
+
   const ptid = newItem.little_message.product_id;
-  const response = yield fetch('http://localhost:5555/products/' + ptid, {
-    method: 'PATCH',
-    body: JSON.stringify(data),
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }),
-  });
-  // console.log(jsonObject);
+  const response = yield fetch(
+    'http://localhost:5000/products/littlemsg' + ptid,
+    {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }
+  );
+
   yield getProductsInstate();
 }
 
 //購物車
-
 function* addcartAction(newItem) {
   yield; // console.log(newItem.cart_data);
   const data = newItem.cart_data;
   const mbid = newItem.cart_data.id;
-  // console.log(data);
+  console.log(data);
   const response = yield fetch('http://localhost:5555/memberdata/' + mbid, {
     method: 'PUT',
     body: JSON.stringify(data),

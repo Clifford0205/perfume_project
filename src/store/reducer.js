@@ -4,6 +4,7 @@ import {
   HANDLE_INPUT_CHANGE,
   CLEAN_ALL_INPUT,
   PRODUCT_IN_LIST,
+  MEMBER_IN_LIST,
   PAGE_CHANGE,
   REGISTER_MODAL_SHOW,
   REGISTER_MODAL_CLOSE,
@@ -291,6 +292,12 @@ export default (state = defaultState, action) => {
     newState.m_mobile = '';
     newState.m_birthday = '';
     // console.log(newState);
+    return newState;
+  }
+
+  if (action.type === MEMBER_IN_LIST) {
+    const newState = JSON.parse(JSON.stringify(state));
+    newState.memberList = action.data;
     return newState;
   }
 

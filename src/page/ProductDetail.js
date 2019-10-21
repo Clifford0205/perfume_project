@@ -123,7 +123,7 @@ class ProductDetail extends React.Component {
             {
               text: member + ':' + this.state.Big_message,
               id: 1,
-              little_message: '[]',
+              little_message: [],
             },
           ],
         },
@@ -310,7 +310,7 @@ class ProductDetail extends React.Component {
                   <div className="gallary">
                     <ul className="ga-ul">
                       {theProductData.imglist.map(item => (
-                        <li key={item.p_sid} onClick={this.handleChangeimg}>
+                        <li key={item.id} onClick={this.handleChangeimg}>
                           <img src={item.img} alt="" />
                         </li>
                       ))}
@@ -467,7 +467,7 @@ class ProductDetail extends React.Component {
                       目前沒有留言
                     </p>
                     {theProductData.message.map(item => (
-                      <li key={item.p_sid}>
+                      <li key={item.id}>
                         <p>{item.text}</p>
 
                         <ul className="little-ul">

@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 
 import {
   InputChangeAction,
+  getAllmemberAction,
   memberRegisterAction,
 } from '../store/actionCreators.js';
 
@@ -41,7 +42,13 @@ class RegisterModal extends React.Component {
   };
 
   handleMemberRegister = () => {
+    let action = '';
     let isPassed = true;
+
+    let allMail = [];
+    allMail = this.state.memberList.map(item => item.m_mail);
+
+    console.log(allMail);
 
     const m_data = {
       m_mail: this.state.m_mail,
@@ -49,8 +56,8 @@ class RegisterModal extends React.Component {
       m_name: this.state.m_name,
       m_mobile: this.state.m_mobile,
       m_birthday: this.state.m_birthday,
-      buy_record: [],
-      shopping_cart: [],
+      buy_record: '[]',
+      shopping_cart: '[]',
     };
 
     //手機號碼驗證
@@ -68,6 +75,11 @@ class RegisterModal extends React.Component {
     if (!email_pattern.test(document.querySelector('.m_mail').value)) {
       document.querySelector('.m_mail').style.borderColor = 'red';
       document.querySelector('.m_mailHelp').innerHTML = '請填寫正確的E-mail!';
+      isPassed = false;
+    }
+    if (allMail.find(item => item === this.state.m_mail)) {
+      document.querySelector('.m_mail').style.borderColor = 'red';
+      document.querySelector('.m_mailHelp').innerHTML = 'E-mail重複使用';
       isPassed = false;
     }
 
@@ -93,7 +105,7 @@ class RegisterModal extends React.Component {
     }
 
     if (isPassed) {
-      const action = memberRegisterAction(m_data);
+      action = memberRegisterAction(m_data);
       // console.log(action);
       store.dispatch(action);
     }
