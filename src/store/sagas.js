@@ -162,6 +162,31 @@ function* MemberLogin(newItem) {
   }
 }
 
+//重新抓取資料庫會員資料並更新storage
+function* getMemberInfo(m_sid) {
+  yield console.log(m_sid);
+  try {
+    const data = m_sid;
+    const response = yield fetch('http://localhost:5000/memberagain', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    });
+    const jsonObject = yield response.json();
+    yield console.log(jsonObject[0]);
+    localStorage.setItem('user', JSON.stringify(jsonObject[0]));
+    let this_user = JSON.parse(localStorage.getItem('user'));
+    let action = '';
+    action = checkLoginState(this_user);
+    yield put(action);
+  } catch (e) {
+    // console.log(e);
+  }
+}
+
 //修改會員資料 改
 function* editMemberaction(newItem) {
   yield; // console.log(newItem.edit_data);
@@ -275,7 +300,7 @@ function* littleMsg(newItem) {
   yield getProductsInstate();
 }
 
-//購物車
+//購物車 改
 function* addcartAction(newItem) {
   yield; // console.log(newItem.cart_data);
   const data = newItem.cart_data.cart_data;
@@ -294,17 +319,11 @@ function* addcartAction(newItem) {
   );
   const jsonObject = yield response.json();
   console.log(jsonObject);
-  // localStorage.setItem('user', JSON.stringify(jsonObject));
-  // // console.log(JSON.parse(localStorage.getItem('user')));
-  // let this_user = JSON.parse(localStorage.getItem('user'));
-  // // console.log(this_user);
-  // yield alert('成功加入購物車');
-
-  // let action = '';
-  // action = checkLoginState(this_user);
-  // yield put(action);
-  // action = totalZeroAction();
-  // yield put(action);
+  yield getMemberInfo({ m_sid: mbid });
+  yield alert('成功加入購物車');
+  let action = '';
+  action = totalZeroAction();
+  yield put(action);
 }
 
 //刪除購物車品項
@@ -358,7 +377,6 @@ function* addInOrderAction(newItem) {
   yield put(action);
 }
 
-// function* getMemberInfo() {}
 //專案
 
 //generator 函數
@@ -377,7 +395,7 @@ function* mySaga() {
   yield takeEvery(DELETE_CART, deleteCartAction);
   yield takeEvery(ADD_ORDER, addInOrderAction);
   yield takeEvery(GET_ALL_MEMBER, getAllMemberAction);
-  // yield takeEvery(REGET_INFO, getMemberInfo);
+  yield takeEvery(REGET_INFO, getMemberInfo);
   //專案
 }
 

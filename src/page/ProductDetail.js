@@ -262,12 +262,12 @@ class ProductDetail extends React.Component {
 
     const cart_data = {
       cart_data: {
-        m_mail: this.state.my_mail,
-        m_password: this.state.my_pswd,
-        m_name: this.state.my_name,
-        m_mobile: this.state.my_mobile,
-        m_birthday: this.state.my_birthday,
-        buy_record: JSON.stringify(this.state.my_buy_record),
+        // m_mail: this.state.my_mail,
+        // m_password: this.state.my_pswd,
+        // m_name: this.state.my_name,
+        // m_mobile: this.state.my_mobile,
+        // m_birthday: this.state.my_birthday,
+        // buy_record: JSON.stringify(this.state.my_buy_record),
         shopping_cart: JSON.stringify([
           ...this.state.my_cart,
           {
