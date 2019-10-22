@@ -1,11 +1,13 @@
 import React from 'react';
-import Language from '../component/Language';
 import MyNavbar from '../component/MyNavbar';
+
 import { Container, Button } from 'react-bootstrap';
 import store from '../store/index.js';
 import './ShoppingCart.scss';
+
 import { Redirect, Link, withRouter } from 'react-router-dom';
 import 'animate.css/animate.min.css';
+
 import {
   InputChangeAction,
   getProducteAction,
@@ -29,6 +31,7 @@ class ShoppingCart extends React.Component {
   //生命週期:一開始載入資料
   componentDidMount() {
     this.mounted = true;
+
     // console.log(this.mounted);
     if (this.mounted) {
       let action = '';
@@ -50,15 +53,34 @@ class ShoppingCart extends React.Component {
     // console.log(e.target.id);
     let allhide = document.querySelectorAll('.thehide');
     let alltitle = document.querySelectorAll('.the-title');
+
     for (let i = 0; i < allhide.length; i++) {
       allhide[i].classList.remove('show');
     }
+
     for (let i = 0; i < alltitle.length; i++) {
       alltitle[i].classList.remove('active');
     }
 
-    document.querySelector(`.${e.target.id}`).classList.add('show');
-    document.querySelector(`#${e.target.id}`).classList.add('active');
+    document
+      .querySelector(
+        `.$ {
+        e.target.id
+      }
+
+      `
+      )
+      .classList.add('show');
+
+    document
+      .querySelector(
+        `#$ {
+        e.target.id
+      }
+
+      `
+      )
+      .classList.add('active');
   };
 
   handleCancel = e => {
@@ -72,9 +94,13 @@ class ShoppingCart extends React.Component {
     let shopping_cart = this.state.my_cart.filter(item => item.id !== +clickID);
 
     let delItem = {
-      shopping_cart: { shopping_cart: JSON.stringify(shopping_cart) },
+      shopping_cart: {
+        shopping_cart: JSON.stringify(shopping_cart),
+      },
+
       id: member_id,
     };
+
     const action = deleteCartAction(delItem);
     store.dispatch(action);
   };
@@ -89,86 +115,118 @@ class ShoppingCart extends React.Component {
     } else
       return (
         <>
-          <MyNavbar />
+          {' '}
+          <MyNavbar />{' '}
           <Container className="ShoppingCart">
+            {' '}
             <section>
-              <img src="/images/2000x.webp" alt="" className="w-100" />
-            </section>
+              {' '}
+              <img src="/images/2000x.webp" alt="" className="w-100" />{' '}
+            </section>{' '}
             <Container className="pb-5">
-              <h2 className="text-center">購物車和訂單紀錄</h2>
+              {' '}
+              <h2 className="text-center">購物車和訂單紀錄</h2>{' '}
               <ul className="d-flex   my-3 choose-title">
+                {' '}
                 <li
                   className="w-100 text-center the-title active"
                   id="cart"
                   onClick={this.handleTitleClick}
                 >
-                  我的購物車
-                </li>
-              </ul>
-
+                  {' '}
+                  我的購物車{' '}
+                </li>{' '}
+              </ul>{' '}
               <div className="cart thehide show">
+                {' '}
                 <div
                   className="no-product mt-3"
                   style={{
-                    display: `${
-                      this.state.my_cart.length === 0 ? 'block' : 'none'
-                    }`,
+                    display: `$ {
+            this.state.my_cart.length===0 ? 'block' : 'none'
+          }
+
+          `,
                   }}
                 >
-                  <h5 className="text-center">目前購物車內無商品</h5>
-                </div>
+                  {' '}
+                  <h5 className="text-center">目前購物車內無商品</h5>{' '}
+                </div>{' '}
                 <ul>
+                  {' '}
                   {this.state.my_cart.map(item => (
                     <li key={item.id} className="row" data-id={item.id}>
+                      {' '}
                       <Link
                         to={'/ProductDetail/' + item.product_id}
-                        className="col"
+                        className="col-md-4"
                       >
-                        <img src={item.img} alt="" />
-                      </Link>
-                      <p className="col">購買數量:{item.amount}</p>
-                      <p className="col">單價:{item.price}</p>
+                        {' '}
+                        <p className="the-img">
+                          {' '}
+                          <img src={item.img} alt="" />{' '}
+                        </p>{' '}
+                      </Link>{' '}
+                      <p className="col">購買數量: {item.amount}</p>{' '}
+                      <p className="col">單價: {item.price}</p>{' '}
                       <p className="col ">
-                        小計:
+                        {' '}
+                        小計:{' '}
                         <span className="subtotal">
+                          {' '}
                           {item.amount * item.price}
-                        </span>
-                      </p>
-
-                      <Button
-                        className="text-center cancel"
-                        onClick={this.handleCancel}
-                      >
-                        X
-                      </Button>
+                        </span>{' '}
+                      </p>{' '}
+                      <p className="col text-center ">
+                        {' '}
+                        <Button
+                          className="text-center cancel"
+                          onClick={this.handleCancel}
+                        >
+                          {' '}
+                          X{' '}
+                        </Button>{' '}
+                      </p>{' '}
                     </li>
                   ))}
-                </ul>
+                </ul>{' '}
                 <div>
-                  <p className="text-right">總計:{this.state.bigTotal}</p>
-                </div>
+                  {' '}
+                  <p className="text-right">總計: {this.state.bigTotal}</p>{' '}
+                </div>{' '}
                 <div>
-                  <Link to={`/member/checkout/${this.state.my_id}`}>
+                  {' '}
+                  <Link
+                    to={`/member/checkout/$ {
+          this.state.my_id
+        }
+
+        `}
+                  >
+                    {' '}
                     <Button
                       className="ml-auto "
                       style={{
-                        display: `${
-                          this.state.my_cart.length === 0 ? 'none' : 'block'
-                        }`,
+                        display: `$ {
+            this.state.my_cart.length===0 ? 'none' : 'block'
+          }
+
+          `,
                       }}
                     >
-                      前往結帳
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+                      {' '}
+                      前往結帳{' '}
+                    </Button>{' '}
+                  </Link>{' '}
+                </div>{' '}
+              </div>{' '}
               <div className="buy-record thehide">
-                <ul></ul>
-              </div>
-            </Container>
-          </Container>
-
-          <Language />
+                {' '}
+                <ul></ul>{' '}
+              </div>{' '}
+            </Container>{' '}
+          </Container>{' '}
+          {/* <Language /> */}
         </>
       );
   }

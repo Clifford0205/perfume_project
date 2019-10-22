@@ -1,5 +1,4 @@
 import React from 'react';
-import Language from '../component/Language';
 import MyNavbar from '../component/MyNavbar';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import store from '../store/index.js';
@@ -310,7 +309,7 @@ class ShoppingCart extends React.Component {
 
     const data = {
       buy_record: {
-        buy_record: [
+        buy_record: JSON.stringify([
           ...this.state.my_buy_record,
           {
             time: time,
@@ -327,8 +326,8 @@ class ShoppingCart extends React.Component {
             recipient_road: recipient_road,
             pay_way2: pay_way2,
           },
-        ],
-        shopping_cart: [],
+        ]),
+        shopping_cart: '[]',
       },
       id: this.state.my_id,
     };
@@ -376,12 +375,18 @@ class ShoppingCart extends React.Component {
               <div className="cart">
                 <ul>
                   {this.state.my_cart.map(item => (
-                    <li key={item.id} className="row" data-id={item.id}>
+                    <li
+                      key={item.id}
+                      className="row product-list"
+                      data-id={item.id}
+                    >
                       <Link
                         to={'/ProductDetail/' + item.product_id}
-                        className="col"
+                        className="col-md-4"
                       >
-                        <img src={item.img} alt="" />
+                        <p className="the-img">
+                          <img src={item.img} alt="" />
+                        </p>
                       </Link>
                       <p className="col">購買數量:{item.amount}</p>
                       <p className="col">單價:{item.price}</p>
@@ -392,12 +397,14 @@ class ShoppingCart extends React.Component {
                         </span>
                       </p>
 
-                      <Button
-                        className="text-center cancel"
-                        onClick={this.handleCancel}
-                      >
-                        X
-                      </Button>
+                      <p className="col text-center">
+                        <Button
+                          className="text-center cancel"
+                          onClick={this.handleCancel}
+                        >
+                          X
+                        </Button>
+                      </p>
                     </li>
                   ))}
                 </ul>
@@ -730,7 +737,7 @@ class ShoppingCart extends React.Component {
             </div>
           </Container>
 
-          <Language />
+          {/* <Language /> */}
         </>
       );
   }

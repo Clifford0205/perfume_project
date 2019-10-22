@@ -1,5 +1,4 @@
 import React from 'react';
-import Language from '../component/Language';
 import MyNavbar from '../component/MyNavbar';
 import { Container, Button } from 'react-bootstrap';
 import store from '../store/index.js';

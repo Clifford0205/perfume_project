@@ -76,7 +76,7 @@ class Pagination extends React.Component {
   };
 
   render() {
-    console.log(this.state.currentPage);
+    // console.log(this.state.currentPage);
     const pageNumbers = [];
     let totalPosts = this.props.totalPosts;
     let postPerPage = this.state.postPerPage;

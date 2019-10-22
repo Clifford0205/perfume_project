@@ -250,7 +250,7 @@ class LandingPage extends React.Component {
                   <Container fluid={true} className="product">
                     <Row className="content">
                       <Col className="align-self-center ">
-                        <h2 className="text-center page4-title transition text-center">
+                        <h2 className="text-center page4-title transition text-center mt-5  ">
                           {this.state.chinese ? '烏德之香' : 'THE HOUSE OF OUD'}
                         </h2>
                         <Row className="product-area">

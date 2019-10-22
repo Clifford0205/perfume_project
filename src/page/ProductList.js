@@ -94,14 +94,14 @@ class ProductList extends React.Component {
             </Col>
           </Row>
           <Row className="classification pt-3 ">
-            <Col>
+            <Col xs={2}>
               <div
                 className="active filter all"
                 id=" "
                 onClick={e => this.handleClassify(e)}
               ></div>
             </Col>
-            <Col>
+            <Col xs={2}>
               <div>
                 <p
                   className="filter"
@@ -112,7 +112,7 @@ class ProductList extends React.Component {
                 </p>
               </div>
             </Col>
-            <Col>
+            <Col xs={2}>
               <div>
                 <p
                   className="filter"
@@ -123,7 +123,7 @@ class ProductList extends React.Component {
                 </p>
               </div>
             </Col>
-            <Col>
+            <Col xs={2}>
               <div>
                 <p
                   className="filter"
@@ -134,7 +134,7 @@ class ProductList extends React.Component {
                 </p>
               </div>
             </Col>
-            <Col>
+            <Col xs={2}>
               <div>
                 <p
                   className="filter"
@@ -145,7 +145,7 @@ class ProductList extends React.Component {
                 </p>
               </div>
             </Col>
-            <Col>
+            <Col xs={2}>
               <div>
                 <p
                   className="filter"

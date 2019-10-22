@@ -1,5 +1,4 @@
 import React from 'react';
-import Language from '../component/Language';
 import MyNavbar from '../component/MyNavbar';
 import { Container, Row, Col } from 'react-bootstrap';
 import store from '../store/index.js';
@@ -171,7 +170,7 @@ class BuyRecord extends React.Component {
             </Container>
           </Container>
 
-          <Language />
+          {/* <Language /> */}
         </>
       );
   }

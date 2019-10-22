@@ -287,7 +287,7 @@ class ProductDetail extends React.Component {
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     // console.log(this.state.productList);
     const theProductData = this.state.productList.find(
       item => item.p_sid === +this.props.match.params.id

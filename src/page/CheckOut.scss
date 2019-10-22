@@ -60,14 +60,29 @@
     }
 
     .cart {
-        img {
-            width: 150px;
-        }
 
-        .cancel {
-            width: 25px;
-            height: 25px;
-            padding: 0;
+        .product-list {
+            p {
+                white-space: unset;
+                line-height: unset;
+            }
+
+            .the-img {
+                @include md {
+                    text-align: center;
+
+                }
+
+                img {
+                    width: 180px;
+                }
+            }
+
+            .cancel {
+                width: 25px;
+                height: 25px;
+                padding: 0;
+            }
         }
     }
 }

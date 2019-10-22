@@ -41,6 +41,7 @@
         }
     }
 
+
     .thehide {
         display: none;
     }
@@ -50,8 +51,14 @@
     }
 
     .cart {
-        img {
-            width: 150px;
+        .the-img {
+            @include md {
+                text-align: center;
+            }
+
+            img {
+                width: 180px;
+            }
         }
 
         .cancel {

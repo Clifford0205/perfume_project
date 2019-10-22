@@ -1,7 +1,35 @@
+@mixin lg {
+    @media (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (max-width: 576px) {
+        @content;
+    }
+}
+
+
 .ProductList {
     .classification {
         p {
             display: inline-block;
+            margin: 0;
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+
+            @include md {
+                writing-mode: vertical-lr;
+                text-orientation: upright;
+            }
         }
 
         .all {

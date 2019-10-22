@@ -27,14 +27,12 @@ import {
 
 //專案
 
-//拿到首頁文章
-
-//送出顧客意見
+//送出顧客意見 改
 function* saveclientmessage(newItem) {
   // console.log(newItem.item);
   try {
     const data = newItem.item;
-    const response = yield fetch('http://localhost:5555/clientmessage', {
+    const response = yield fetch('http://localhost:5000/clientmessage', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({
@@ -42,7 +40,8 @@ function* saveclientmessage(newItem) {
         'Content-Type': 'application/json',
       }),
     });
-
+    const jsonObject = yield response.json();
+    console.log(jsonObject);
     // console.log(jsonObject);
     yield alert('您的意見已經提交');
     const action = cleanInputAction();
@@ -66,7 +65,7 @@ function* getProductsInstate() {
     // if (!response.ok) throw new Error(response.statusText);
     const jsonObject = yield response.json();
     for (let i = 0; i < jsonObject.length; i++) {
-      console.log(jsonObject[i]);
+      // console.log(jsonObject[i]);
     }
 
     jsonObject.reverse();
@@ -91,7 +90,7 @@ function* getAllMemberAction() {
     // if (!response.ok) throw new Error(response.statusText);
 
     const jsonObject = yield response.json();
-    console.log(jsonObject);
+    // console.log(jsonObject);
     const action = memberInListAction(jsonObject);
     // console.log(action);
     yield put(action);
@@ -164,7 +163,7 @@ function* MemberLogin(newItem) {
 
 //重新抓取資料庫會員資料並更新storage
 function* getMemberInfo(m_sid) {
-  yield console.log(m_sid);
+  // yield console.log(m_sid);
   try {
     const data = m_sid;
     const response = yield fetch('http://localhost:5000/memberagain', {
@@ -207,7 +206,7 @@ function* editMemberaction(newItem) {
     }
   );
   const jsonObject = yield response.json();
-  console.log(jsonObject);
+  // console.log(jsonObject);
 
   if (jsonObject.passed) {
     yield getMemberInfo({ m_sid: member_id });
@@ -234,7 +233,7 @@ function* editPasswordAction(newItem) {
     }
   );
   const jsonObject = yield response.json();
-  console.log(jsonObject);
+  // console.log(jsonObject);
   if (jsonObject.passed) {
     yield getMemberInfo({ m_sid: member_id });
     yield alert('密碼修改成功');
@@ -247,7 +246,7 @@ function* editPasswordAction(newItem) {
 function* bigMessageAction(newItem) {
   yield; // console.log(newItem.big_message.message);
   const data = newItem.big_message.message.message;
-  console.log(data);
+  // console.log(data);
   const ptid = newItem.big_message.product_id;
   const response = yield fetch(
     'http://localhost:5000/products/bigmsg/' + ptid,
@@ -261,7 +260,7 @@ function* bigMessageAction(newItem) {
     }
   );
   const jsonObject = yield response.json();
-  console.log(jsonObject);
+  // console.log(jsonObject);
 
   yield getProductsInstate();
   let action = '';
@@ -272,7 +271,7 @@ function* bigMessageAction(newItem) {
 //小留言 改
 function* littleMsg(newItem) {
   const data = newItem.little_message.message.message;
-  yield console.log(data);
+  // yield console.log(data);
 
   const ptid = newItem.little_message.product_id;
   const response = yield fetch(
@@ -295,7 +294,7 @@ function* addcartAction(newItem) {
   yield; // console.log(newItem.cart_data);
   const data = newItem.cart_data.cart_data;
   const mbid = newItem.cart_data.id;
-  console.log(data);
+  // console.log(data);
   const response = yield fetch(
     'http://localhost:5000/memberdata/addcart/' + mbid,
     {
@@ -308,7 +307,7 @@ function* addcartAction(newItem) {
     }
   );
   const jsonObject = yield response.json();
-  console.log(jsonObject);
+  // console.log(jsonObject);
   yield getMemberInfo({ m_sid: mbid });
   yield alert('成功加入購物車');
   let action = '';
@@ -333,35 +332,32 @@ function* deleteCartAction(newItem) {
     }
   );
   const jsonObject = yield response.json();
-  console.log(jsonObject);
+  // console.log(jsonObject);
   yield getMemberInfo({ m_sid: id });
   yield alert('刪除成功');
 }
 
-//購物車到訂單
+//購物車到訂單 改
 function* addInOrderAction(newItem) {
   // yield // console.log(newItem);
   const data = newItem.data.buy_record;
   const id = newItem.data.id;
   yield; // console.log(data);
-  const response = yield fetch('http://localhost:5555/memberdata/' + id, {
-    method: 'PATCH',
-    body: JSON.stringify(data),
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }),
-  });
+  const response = yield fetch(
+    'http://localhost:5000/memberdata/inorder/' + id,
+    {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }
+  );
   const jsonObject = yield response.json();
   // console.log(jsonObject);
-
-  localStorage.setItem('user', JSON.stringify(jsonObject));
-  // console.log(JSON.parse(localStorage.getItem('user')));
-  let this_user = JSON.parse(localStorage.getItem('user'));
-  // console.log(this_user);
+  yield getMemberInfo({ m_sid: id });
   yield alert('購買成功');
-  const action = checkLoginState(this_user);
-  yield put(action);
 }
 
 //專案
