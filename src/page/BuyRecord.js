@@ -4,7 +4,7 @@ import MyNavbar from '../component/MyNavbar';
 import { Container, Row, Col } from 'react-bootstrap';
 import store from '../store/index.js';
 import './BuyRecord.scss';
-import { Link, withRouter } from 'react-router-dom';
+import { Redirect, Link, withRouter } from 'react-router-dom';
 import 'animate.css/animate.min.css';
 import {
   InputChangeAction,
@@ -17,16 +17,15 @@ class BuyRecord extends React.Component {
     super(props);
     this.mounted = false;
     this.state = store.getState();
-    if (this.mounted) {
-      store.subscribe(this.handleStoreChange);
-    }
+    store.subscribe(this.handleStoreChange);
 
     // console.log(this.state);
   }
 
   handleStoreChange = () => {
-    this.setState(store.getState());
-    // // console.log('store change');
+    if (this.mounted) {
+      this.setState(store.getState());
+    }
   };
 
   //生命週期:一開始載入資料
@@ -91,80 +90,90 @@ class BuyRecord extends React.Component {
 
   render() {
     // console.log(this.state.my_buy_record);
-    return (
-      <>
-        <MyNavbar />
-        <Container className="BuyRecord">
-          <section>
-            <img src="/images/2000x.webp" alt="" className="w-100" />
-          </section>
-          <Container className="pb-5">
-            <h2 className="text-center">購買紀錄</h2>
-            <ul>
-              {this.state.my_buy_record.map(item => (
-                <li key={item.id} className="single-order">
-                  <Row>
-                    <Col className="">
-                      {item.product.map((item, index) => (
-                        <div className="d-flex" key={index}>
-                          <Link
-                            to={'/ProductDetail/' + item.product_id}
-                            className=" name text-nowrap"
-                          >
-                            品項:{item.name}
-                          </Link>
-                          <div className="ml-3 amount text-nowrap">
-                            數量:{item.amount}
+    console.log(this.state);
+    console.log(this.props.match.params.id);
+
+    if (
+      this.state.my_id !== +this.props.match.params.id &&
+      this.state.my_id &&
+      +this.props.match.params.id
+    ) {
+      return <Redirect to="/" />;
+    } else
+      return (
+        <>
+          <MyNavbar />
+          <Container className="BuyRecord">
+            <section>
+              <img src="/images/2000x.webp" alt="" className="w-100" />
+            </section>
+            <Container className="pb-5">
+              <h2 className="text-center">購買紀錄</h2>
+              <ul>
+                {this.state.my_buy_record.map(item => (
+                  <li key={item.id} className="single-order">
+                    <Row>
+                      <Col className="">
+                        {item.product.map((item, index) => (
+                          <div className="d-flex" key={index}>
+                            <Link
+                              to={'/ProductDetail/' + item.product_id}
+                              className=" name text-nowrap"
+                            >
+                              品項:{item.name}
+                            </Link>
+                            <div className="ml-3 amount text-nowrap">
+                              數量:{item.amount}
+                            </div>
+                            <div className="ml-3 price text-nowrap">
+                              單價:{item.price}
+                            </div>
                           </div>
-                          <div className="ml-3 price text-nowrap">
-                            單價:{item.price}
-                          </div>
+                        ))}
+                      </Col>
+
+                      <Col className="">
+                        <div className="recipient_name">
+                          收件人姓名:{item.recipient_name}
                         </div>
-                      ))}
-                    </Col>
 
-                    <Col className="">
-                      <div className="recipient_name">
-                        收件人姓名:{item.recipient_name}
-                      </div>
+                        <div className="recipient_name">
+                          收件人手機:{item.recipient_mobile}
+                        </div>
 
-                      <div className="recipient_name">
-                        收件人手機:{item.recipient_mobile}
-                      </div>
+                        <div className="recipient_address">
+                          <p>
+                            收件人地址:
+                            {item.delivery_city + '  ' + item.delivery_town}
+                            <br />
+                            {item.recipient_road}
+                          </p>
+                        </div>
+                      </Col>
 
-                      <div className="recipient_address">
-                        <p>
-                          收件人地址:
-                          {item.delivery_city + '  ' + item.delivery_town}
-                          <br />
-                          {item.recipient_road}
-                        </p>
-                      </div>
-                    </Col>
-
-                    <Col>
+                      <Col>
+                        <div className="">
+                          <p>訂單總金額:{item.total}</p>
+                        </div>
+                      </Col>
+                    </Row>
+                    <div className="d-flex justify-content-between">
                       <div className="">
-                        <p>訂單總金額:{item.total}</p>
+                        <p>付款方式:{item.pay_way2}</p>
                       </div>
-                    </Col>
-                  </Row>
-                  <div className="d-flex justify-content-between">
-                    <div className="">
-                      <p>付款方式:{item.pay_way2}</p>
+                      <div className="">
+                        <p>訂單成立時間:{item.time}</p>
+                      </div>
                     </div>
-                    <div className="">
-                      <p>訂單成立時間:{item.time}</p>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            </Container>
           </Container>
-        </Container>
 
-        <Language />
-      </>
-    );
+          <Language />
+        </>
+      );
   }
 }
 

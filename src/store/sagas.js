@@ -12,6 +12,7 @@ import {
   DELETE_CART,
   ADD_ORDER,
   GET_ALL_MEMBER,
+  REGET_INFO,
 } from './actionTypes.js';
 import {
   cleanInputAction,
@@ -161,7 +162,7 @@ function* MemberLogin(newItem) {
   }
 }
 
-//修改會員資料
+//修改會員資料 改
 function* editMemberaction(newItem) {
   yield; // console.log(newItem.edit_data);
   const member_id = newItem.edit_data.id;
@@ -196,13 +197,13 @@ function* editMemberaction(newItem) {
   }
 }
 
-//修改密碼
+//修改密碼 改
 function* editPasswordAction(newItem) {
   yield; // console.log(newItem.edit_pswd);
   const member_id = newItem.edit_pswd.id;
-  const data = newItem.edit_pswd;
+  const data = newItem.edit_pswd.edit_pswd;
   const response = yield fetch(
-    'http://localhost:5000/memberdata/' + member_id,
+    'http://localhost:5000/memberdata/password/' + member_id,
     {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -213,14 +214,18 @@ function* editPasswordAction(newItem) {
     }
   );
   const jsonObject = yield response.json();
-  // console.log(jsonObject);
-  localStorage.setItem('user', JSON.stringify(jsonObject));
-  // console.log(JSON.parse(localStorage.getItem('user')));
-  let this_user = JSON.parse(localStorage.getItem('user'));
-  // console.log(this_user);
-  yield alert('密碼修改成功');
-  const action = checkLoginState(this_user);
-  yield put(action);
+  console.log(jsonObject);
+  if (jsonObject.passed) {
+    localStorage.setItem('user', JSON.stringify(jsonObject.body));
+    // console.log(JSON.parse(localStorage.getItem('user')));
+    let this_user = JSON.parse(localStorage.getItem('user'));
+    // console.log(this_user);
+    yield alert('密碼修改成功');
+    const action = checkLoginState(this_user);
+    yield put(action);
+  } else {
+    yield alert('資料沒有修改');
+  }
 }
 
 //大留言 改
@@ -273,30 +278,33 @@ function* littleMsg(newItem) {
 //購物車
 function* addcartAction(newItem) {
   yield; // console.log(newItem.cart_data);
-  const data = newItem.cart_data;
+  const data = newItem.cart_data.cart_data;
   const mbid = newItem.cart_data.id;
   console.log(data);
-  const response = yield fetch('http://localhost:5555/memberdata/' + mbid, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }),
-  });
+  const response = yield fetch(
+    'http://localhost:5000/memberdata/addcart/' + mbid,
+    {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }
+  );
   const jsonObject = yield response.json();
-  // console.log(jsonObject);
-  localStorage.setItem('user', JSON.stringify(jsonObject));
-  // console.log(JSON.parse(localStorage.getItem('user')));
-  let this_user = JSON.parse(localStorage.getItem('user'));
-  // console.log(this_user);
-  yield alert('成功加入購物車');
+  console.log(jsonObject);
+  // localStorage.setItem('user', JSON.stringify(jsonObject));
+  // // console.log(JSON.parse(localStorage.getItem('user')));
+  // let this_user = JSON.parse(localStorage.getItem('user'));
+  // // console.log(this_user);
+  // yield alert('成功加入購物車');
 
-  let action = '';
-  action = checkLoginState(this_user);
-  yield put(action);
-  action = totalZeroAction();
-  yield put(action);
+  // let action = '';
+  // action = checkLoginState(this_user);
+  // yield put(action);
+  // action = totalZeroAction();
+  // yield put(action);
 }
 
 //刪除購物車品項
@@ -349,11 +357,13 @@ function* addInOrderAction(newItem) {
   const action = checkLoginState(this_user);
   yield put(action);
 }
-//窩窩專案
+
+// function* getMemberInfo() {}
+//專案
 
 //generator 函數
 function* mySaga() {
-  //窩窩專案
+  //專案
 
   yield takeEvery(HANDLE_FORM_SEND, saveclientmessage);
   yield takeEvery(GET_PRODUCT, getProductsInstate);
@@ -367,7 +377,8 @@ function* mySaga() {
   yield takeEvery(DELETE_CART, deleteCartAction);
   yield takeEvery(ADD_ORDER, addInOrderAction);
   yield takeEvery(GET_ALL_MEMBER, getAllMemberAction);
-  //窩窩專案
+  // yield takeEvery(REGET_INFO, getMemberInfo);
+  //專案
 }
 
 export default mySaga;

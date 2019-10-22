@@ -4,7 +4,7 @@ import MyNavbar from '../component/MyNavbar';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import store from '../store/index.js';
 import './CheckOut.scss';
-import { Link, withRouter } from 'react-router-dom';
+import { Redirect, Link, withRouter } from 'react-router-dom';
 import 'animate.css/animate.min.css';
 import {
   InputChangeAction,
@@ -25,42 +25,43 @@ class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = store.getState();
+    this.mounted = false;
     store.subscribe(this.handleStoreChange);
-    // console.log(this.state);
   }
 
   handleStoreChange = () => {
-    this.setState(store.getState());
-    // // console.log('store change');
+    if (this.mounted) {
+      this.setState(store.getState());
+    }
   };
 
   //生命週期:一開始載入資料
   componentDidMount() {
-    // console.log(this.state);
+    this.mounted = true;
+    if (this.mounted) {
+      let action = '';
+      action = getProducteAction();
+      store.dispatch(action);
 
-    let action = '';
-    action = getProducteAction();
-    store.dispatch(action);
+      let cityops = [];
+      let townops = [];
 
-    let cityops = [];
-    let townops = [];
+      for (let i = 0; i < Zone_data.length; i++) {
+        cityops.push(Zone_data[i].城市);
+      }
 
-    for (let i = 0; i < Zone_data.length; i++) {
-      cityops.push(Zone_data[i].城市);
+      for (let j = 0; j < Zone_data[0].地區.length; j++) {
+        townops.push(Zone_data[0].地區[j]);
+      }
+
+      action = loadZoneAction(cityops, townops);
+      store.dispatch(action);
     }
-
-    for (let j = 0; j < Zone_data[0].地區.length; j++) {
-      townops.push(Zone_data[0].地區[j]);
-    }
-
-    action = loadZoneAction(cityops, townops);
-    store.dispatch(action);
   }
 
-  componentDidUpdate() {
-    // console.log(this.state);
+  componentWillUnmount() {
+    this.mounted = false;
   }
-
   changeArea = e => {
     let index = Zone_data.findIndex(item => item.城市 === e.target.value);
     let townops = [];
@@ -337,379 +338,401 @@ class ShoppingCart extends React.Component {
   };
 
   render() {
-    // console.log(this.state);
-    return (
-      <>
-        <MyNavbar />
-        <Container className="CheckOut">
-          <section>
-            <img src="/images/2000x.webp" alt="" className="w-100" />
-          </section>
-          <div
-            className="no-product mt-3"
-            style={{
-              display: `${this.state.my_cart.length === 0 ? 'block' : 'none'}`,
-            }}
-          >
-            <h5 className="text-center">目前購物車內無商品</h5>
-          </div>
-          <div
-            className="pb-5"
-            style={{
-              display: `${this.state.my_cart.length === 0 ? 'none' : 'block'}`,
-            }}
-          >
-            <h2 className="text-center">結帳頁面</h2>
-            <div className="cart">
-              <ul>
-                {this.state.my_cart.map(item => (
-                  <li key={item.id} className="row" data-id={item.id}>
-                    <Link
-                      to={'/ProductDetail/' + item.product_id}
-                      className="col"
-                    >
-                      <img src={item.img} alt="" />
-                    </Link>
-                    <p className="col">購買數量:{item.amount}</p>
-                    <p className="col">單價:{item.price}</p>
-                    <p className="col ">
-                      小計:
-                      <span className="subtotal">
-                        {item.amount * item.price}
-                      </span>
-                    </p>
+    console.log(this.state);
 
-                    <Button
-                      className="text-center cancel"
-                      onClick={this.handleCancel}
-                    >
-                      X
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-              <div>
-                <p className="text-right">總計:{this.state.bigTotal}</p>
-              </div>
-              <div className="order-info">
-                <div className="order-title text-center">訂購人資料</div>
-                <ul className="">
-                  <li className="mt-3 d-flex">
-                    <p>姓名:</p>
-                    <input
-                      type="text"
-                      value={this.state.my_name}
-                      readOnly
-                      className="form-control "
-                    />
-                  </li>
-                  <li className="mt-3  d-flex">
-                    <p> E-mail:</p>
-                    <input
-                      type="text"
-                      value={this.state.my_mail}
-                      readOnly
-                      className="form-control "
-                    />
-                  </li>
+    if (
+      this.state.my_id !== +this.props.match.params.id &&
+      this.state.my_id &&
+      +this.props.match.params.id
+    ) {
+      return <Redirect to="/" />;
+    } else
+      return (
+        <>
+          <MyNavbar />
+          <Container className="CheckOut">
+            <section>
+              <img src="/images/2000x.webp" alt="" className="w-100" />
+            </section>
+            <div
+              className="no-product mt-3"
+              style={{
+                display: `${
+                  this.state.my_cart.length === 0 ? 'block' : 'none'
+                }`,
+              }}
+            >
+              <h5 className="text-center">目前購物車內無商品</h5>
+            </div>
+            <div
+              className="pb-5"
+              style={{
+                display: `${
+                  this.state.my_cart.length === 0 ? 'none' : 'block'
+                }`,
+              }}
+            >
+              <h2 className="text-center">結帳頁面</h2>
+              <div className="cart">
+                <ul>
+                  {this.state.my_cart.map(item => (
+                    <li key={item.id} className="row" data-id={item.id}>
+                      <Link
+                        to={'/ProductDetail/' + item.product_id}
+                        className="col"
+                      >
+                        <img src={item.img} alt="" />
+                      </Link>
+                      <p className="col">購買數量:{item.amount}</p>
+                      <p className="col">單價:{item.price}</p>
+                      <p className="col ">
+                        小計:
+                        <span className="subtotal">
+                          {item.amount * item.price}
+                        </span>
+                      </p>
 
-                  <li className="mt-3  d-flex">
-                    <p> 手機號碼:</p>
-                    <input
-                      type="text"
-                      value={this.state.my_mobile}
-                      readOnly
-                      className="form-control "
-                    />
-                  </li>
+                      <Button
+                        className="text-center cancel"
+                        onClick={this.handleCancel}
+                      >
+                        X
+                      </Button>
+                    </li>
+                  ))}
                 </ul>
-              </div>
-              <div className="Recipient-info">
-                <div className="Recipient-title">收件人資料</div>
-                <ul className="d-flex   my-3 choose-title">
-                  <li
-                    className="w-100 text-center the-title active"
-                    id="same"
-                    onClick={event => {
-                      this.handleTitleClick(event);
-                      this.handleClean(event);
-                    }}
-                  >
-                    同訂購人
-                  </li>
-                  <li
-                    className="w-100  text-center the-title "
-                    id="new"
-                    onClick={event => {
-                      this.handleTitleClick(event);
-                      this.handleNewRecipient(event);
-                    }}
-                  >
-                    新增資料
-                  </li>
-                </ul>
-                <ul className="thehide same show">
-                  <li className="mt-3  d-flex">
-                    <p>姓名:</p>
-                    <input
-                      type="text"
-                      value={this.state.my_name}
-                      readOnly
-                      className="form-control "
-                    />
-                  </li>
-                  <li className="mt-3  d-flex">
-                    <p>E-mail:</p>
-                    <input
-                      type="text"
-                      value={this.state.my_mail}
-                      readOnly
-                      className="form-control "
-                    />
-                  </li>
-                  <li className="mt-3  d-flex">
-                    <p> 手機號碼:</p>
-                    <input
-                      type="text"
-                      value={this.state.my_mobile}
-                      readOnly
-                      className="form-control "
-                    />
-                  </li>
-                </ul>
+                <div>
+                  <p className="text-right">總計:{this.state.bigTotal}</p>
+                </div>
+                <div className="order-info">
+                  <div className="order-title text-center">訂購人資料</div>
+                  <ul className="">
+                    <li className="mt-3 d-flex">
+                      <p>姓名:</p>
+                      <input
+                        type="text"
+                        value={this.state.my_name}
+                        readOnly
+                        className="form-control "
+                      />
+                    </li>
+                    <li className="mt-3  d-flex">
+                      <p> E-mail:</p>
+                      <input
+                        type="text"
+                        value={this.state.my_mail}
+                        readOnly
+                        className="form-control "
+                      />
+                    </li>
 
-                <ul className="thehide new">
-                  <li className="mt-3  d-flex">
-                    <p>姓名:</p>
-                    <input
-                      type="text"
-                      value={this.state.recipient_name}
-                      onChange={this.handleFormInputChange}
-                      name="recipient_name"
-                      className="form-control "
-                    />
-                  </li>
-                  <li className="mt-3  d-flex">
-                    <p>E-mail:</p>
-                    <input
-                      type="text"
-                      value={this.state.recipient_mail}
-                      onChange={this.handleFormInputChange}
-                      name="recipient_mail"
-                      className="form-control "
-                    />
-                  </li>
-                  <li className="mt-3  d-flex">
-                    <p>手機號碼:</p>
-                    <input
-                      type="text"
-                      value={this.state.recipient_mobile}
-                      onChange={this.handleFormInputChange}
-                      name="recipient_mobile"
-                      className="form-control "
-                    />
-                  </li>
-                </ul>
-
-                <div className="row">
-                  <Col md={4} className="mt-3">
-                    <select
-                      onChange={e => {
-                        this.changeArea(e);
-                        this.handleAreaState(e);
+                    <li className="mt-3  d-flex">
+                      <p> 手機號碼:</p>
+                      <input
+                        type="text"
+                        value={this.state.my_mobile}
+                        readOnly
+                        className="form-control "
+                      />
+                    </li>
+                  </ul>
+                </div>
+                <div className="Recipient-info">
+                  <div className="Recipient-title">收件人資料</div>
+                  <ul className="d-flex   my-3 choose-title">
+                    <li
+                      className="w-100 text-center the-title active"
+                      id="same"
+                      onClick={event => {
+                        this.handleTitleClick(event);
+                        this.handleClean(event);
                       }}
-                      name="delivery_city"
-                      className="d-block mx-auto form-control"
                     >
-                      {this.state.cityops.map((item, index) => {
-                        if (index === 0) {
-                          return (
-                            <option key={index} value={item} disabled selected>
-                              {item}
-                            </option>
-                          );
-                        } else {
-                          return (
-                            <option key={index} value={item}>
-                              {item}
-                            </option>
-                          );
-                        }
-                      })}
-                    </select>
-                  </Col>
-                  <Col md={4} className="mt-3">
-                    <select
-                      onChange={e => {
-                        this.handleAreaState(e);
+                      同訂購人
+                    </li>
+                    <li
+                      className="w-100  text-center the-title "
+                      id="new"
+                      onClick={event => {
+                        this.handleTitleClick(event);
+                        this.handleNewRecipient(event);
                       }}
-                      name="delivery_town"
-                      className="d-block mx-auto form-control"
                     >
-                      {this.state.townops.map((item, index) => {
-                        if (index === 0) {
-                          return (
-                            <option key={index} value={item} disabled selected>
-                              {item}
-                            </option>
-                          );
-                        } else {
-                          return (
-                            <option key={index} value={item}>
-                              {item}
-                            </option>
-                          );
-                        }
-                      })}
-                    </select>
-                  </Col>
+                      新增資料
+                    </li>
+                  </ul>
+                  <ul className="thehide same show">
+                    <li className="mt-3  d-flex">
+                      <p>姓名:</p>
+                      <input
+                        type="text"
+                        value={this.state.my_name}
+                        readOnly
+                        className="form-control "
+                      />
+                    </li>
+                    <li className="mt-3  d-flex">
+                      <p>E-mail:</p>
+                      <input
+                        type="text"
+                        value={this.state.my_mail}
+                        readOnly
+                        className="form-control "
+                      />
+                    </li>
+                    <li className="mt-3  d-flex">
+                      <p> 手機號碼:</p>
+                      <input
+                        type="text"
+                        value={this.state.my_mobile}
+                        readOnly
+                        className="form-control "
+                      />
+                    </li>
+                  </ul>
 
-                  <Col md={4} className="d-flex mt-3">
-                    <p>路段地址:</p>
+                  <ul className="thehide new">
+                    <li className="mt-3  d-flex">
+                      <p>姓名:</p>
+                      <input
+                        type="text"
+                        value={this.state.recipient_name}
+                        onChange={this.handleFormInputChange}
+                        name="recipient_name"
+                        className="form-control "
+                      />
+                    </li>
+                    <li className="mt-3  d-flex">
+                      <p>E-mail:</p>
+                      <input
+                        type="text"
+                        value={this.state.recipient_mail}
+                        onChange={this.handleFormInputChange}
+                        name="recipient_mail"
+                        className="form-control "
+                      />
+                    </li>
+                    <li className="mt-3  d-flex">
+                      <p>手機號碼:</p>
+                      <input
+                        type="text"
+                        value={this.state.recipient_mobile}
+                        onChange={this.handleFormInputChange}
+                        name="recipient_mobile"
+                        className="form-control "
+                      />
+                    </li>
+                  </ul>
+
+                  <div className="row">
+                    <Col md={4} className="mt-3">
+                      <select
+                        onChange={e => {
+                          this.changeArea(e);
+                          this.handleAreaState(e);
+                        }}
+                        name="delivery_city"
+                        className="d-block mx-auto form-control"
+                      >
+                        {this.state.cityops.map((item, index) => {
+                          if (index === 0) {
+                            return (
+                              <option
+                                key={index}
+                                value={item}
+                                disabled
+                                selected
+                              >
+                                {item}
+                              </option>
+                            );
+                          } else {
+                            return (
+                              <option key={index} value={item}>
+                                {item}
+                              </option>
+                            );
+                          }
+                        })}
+                      </select>
+                    </Col>
+                    <Col md={4} className="mt-3">
+                      <select
+                        onChange={e => {
+                          this.handleAreaState(e);
+                        }}
+                        name="delivery_town"
+                        className="d-block mx-auto form-control"
+                      >
+                        {this.state.townops.map((item, index) => {
+                          if (index === 0) {
+                            return (
+                              <option
+                                key={index}
+                                value={item}
+                                disabled
+                                selected
+                              >
+                                {item}
+                              </option>
+                            );
+                          } else {
+                            return (
+                              <option key={index} value={item}>
+                                {item}
+                              </option>
+                            );
+                          }
+                        })}
+                      </select>
+                    </Col>
+
+                    <Col md={4} className="d-flex mt-3">
+                      <p>路段地址:</p>
+                      <input
+                        type="text"
+                        value={this.state.recipient_road}
+                        onChange={this.handleFormInputChange}
+                        name="recipient_road"
+                        className="d-block mx-auto form-control"
+                      />
+                    </Col>
+                  </div>
+                </div>
+                <div className="">
+                  <p>請選擇付款方式</p>
+                  <select
+                    name="pay_way"
+                    id=""
+                    onChange={e => this.handlePayWay(e)}
+                  >
+                    <option value="" disabled selected>
+                      請選擇
+                    </option>
+                    <option value="cash">貨到付款</option>
+                    <option value="credit_card">信用卡</option>
+                  </select>
+                </div>
+                <Row
+                  className="mt-3"
+                  style={{
+                    display: `${
+                      this.state.pay_way === 'credit_card' ? 'flex' : 'none'
+                    }`,
+                  }}
+                >
+                  <Col md={4} className="mt-3">
+                    信用卡卡號:
                     <input
                       type="text"
-                      value={this.state.recipient_road}
-                      onChange={this.handleFormInputChange}
-                      name="recipient_road"
-                      className="d-block mx-auto form-control"
+                      name="T1"
+                      maxLength="4"
+                      size="4"
+                      onKeyUp={(event, T2) => this.handleNext(event, 'T2')}
+                      className="T1 cardno"
+                      onChange={e => this.handleCardNo(e)}
+                    />
+                    -
+                    <input
+                      type="text"
+                      name="T2"
+                      maxLength="4"
+                      size="4"
+                      onKeyUp={(event, T2) => this.handleNext(event, 'T3')}
+                      className="T2 cardno"
+                      onChange={e => this.handleCardNo(e)}
+                    />
+                    -
+                    <input
+                      type="text"
+                      name="T3"
+                      maxLength="4"
+                      size="4"
+                      onKeyUp={(event, T2) => this.handleNext(event, 'T4')}
+                      className="T3 cardno"
+                      onChange={e => this.handleCardNo(e)}
+                    />
+                    -
+                    <input
+                      type="text"
+                      name="T4"
+                      maxLength="4"
+                      size="4"
+                      className="T4 cardno"
+                      onChange={e => this.handleCardNo(e)}
                     />
                   </Col>
+                  <Col md={4} className="mt-3">
+                    有效日期:
+                    <select
+                      name="valid_month"
+                      id=""
+                      onChange={e => this.handleValidMonth(e)}
+                      value={this.state.valid_month}
+                    >
+                      <option disabled selected value="">
+                        請選擇
+                      </option>
+                      <option>01</option>
+                      <option>02</option>
+                      <option>03</option>
+                      <option>04</option>
+                      <option>05</option>
+                      <option>06</option>
+                      <option>07</option>
+                      <option>08</option>
+                      <option>09</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                    </select>
+                    月
+                    <select
+                      name="valid_year"
+                      id=""
+                      onChange={e => this.handleValidYear(e)}
+                      value={this.state.valid_year}
+                    >
+                      <option disabled selected value="">
+                        請選擇
+                      </option>
+                      <option>2019</option>
+                      <option>2020</option>
+                      <option>2021</option>
+                      <option>2022</option>
+                      <option>2023</option>
+                    </select>
+                    年
+                  </Col>
+                  <Col md={4} className="mt-3">
+                    背面末三碼:
+                    <input
+                      type="text"
+                      maxLength="3"
+                      size="3"
+                      name="back_num"
+                      onChange={e => this.handleFormInputChange(e)}
+                      value={this.state.back_num}
+                    />
+                  </Col>
+                </Row>
+
+                <div>
+                  <h3 className="text-right">總計:{this.state.bigTotal}</h3>
+                  <Button
+                    className="ml-auto d-block "
+                    onClick={e => this.handleBuy(e)}
+                  >
+                    確認購買
+                  </Button>
                 </div>
               </div>
-              <div className="">
-                <p>請選擇付款方式</p>
-                <select
-                  name="pay_way"
-                  id=""
-                  onChange={e => this.handlePayWay(e)}
-                >
-                  <option value="" disabled selected>
-                    請選擇
-                  </option>
-                  <option value="cash">貨到付款</option>
-                  <option value="credit_card">信用卡</option>
-                </select>
-              </div>
-              <Row
-                className="mt-3"
-                style={{
-                  display: `${
-                    this.state.pay_way === 'credit_card' ? 'flex' : 'none'
-                  }`,
-                }}
-              >
-                <Col md={4} className="mt-3">
-                  信用卡卡號:
-                  <input
-                    type="text"
-                    name="T1"
-                    maxLength="4"
-                    size="4"
-                    onKeyUp={(event, T2) => this.handleNext(event, 'T2')}
-                    className="T1 cardno"
-                    onChange={e => this.handleCardNo(e)}
-                  />
-                  -
-                  <input
-                    type="text"
-                    name="T2"
-                    maxLength="4"
-                    size="4"
-                    onKeyUp={(event, T2) => this.handleNext(event, 'T3')}
-                    className="T2 cardno"
-                    onChange={e => this.handleCardNo(e)}
-                  />
-                  -
-                  <input
-                    type="text"
-                    name="T3"
-                    maxLength="4"
-                    size="4"
-                    onKeyUp={(event, T2) => this.handleNext(event, 'T4')}
-                    className="T3 cardno"
-                    onChange={e => this.handleCardNo(e)}
-                  />
-                  -
-                  <input
-                    type="text"
-                    name="T4"
-                    maxLength="4"
-                    size="4"
-                    className="T4 cardno"
-                    onChange={e => this.handleCardNo(e)}
-                  />
-                </Col>
-                <Col md={4} className="mt-3">
-                  有效日期:
-                  <select
-                    name="valid_month"
-                    id=""
-                    onChange={e => this.handleValidMonth(e)}
-                    value={this.state.valid_month}
-                  >
-                    <option disabled selected value="">
-                      請選擇
-                    </option>
-                    <option>01</option>
-                    <option>02</option>
-                    <option>03</option>
-                    <option>04</option>
-                    <option>05</option>
-                    <option>06</option>
-                    <option>07</option>
-                    <option>08</option>
-                    <option>09</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                  </select>
-                  月
-                  <select
-                    name="valid_year"
-                    id=""
-                    onChange={e => this.handleValidYear(e)}
-                    value={this.state.valid_year}
-                  >
-                    <option disabled selected value="">
-                      請選擇
-                    </option>
-                    <option>2019</option>
-                    <option>2020</option>
-                    <option>2021</option>
-                    <option>2022</option>
-                    <option>2023</option>
-                  </select>
-                  年
-                </Col>
-                <Col md={4} className="mt-3">
-                  背面末三碼:
-                  <input
-                    type="text"
-                    maxLength="3"
-                    size="3"
-                    name="back_num"
-                    onChange={e => this.handleFormInputChange(e)}
-                    value={this.state.back_num}
-                  />
-                </Col>
-              </Row>
-
-              <div>
-                <h3 className="text-right">總計:{this.state.bigTotal}</h3>
-                <Button
-                  className="ml-auto d-block "
-                  onClick={e => this.handleBuy(e)}
-                >
-                  確認購買
-                </Button>
-              </div>
             </div>
-          </div>
-        </Container>
+          </Container>
 
-        <Language />
-      </>
-    );
+          <Language />
+        </>
+      );
   }
 }
 

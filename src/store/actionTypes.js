@@ -38,3 +38,4 @@ export const PAY_WAY = 'pay_way';
 export const ADD_ORDER = 'add_order';
 export const NEW_RECIPIENT = 'new_recipient';
 export const LITTLE_TOTAL_TO_ZERO = 'little_total_to_zero';
+export const REGET_INFO = 'reget_info';

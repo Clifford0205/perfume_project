@@ -261,23 +261,25 @@ class ProductDetail extends React.Component {
     // console.log(this.state.my_cart.slice(-1));
 
     const cart_data = {
-      m_mail: this.state.my_mail,
-      m_password: this.state.my_pswd,
-      m_name: this.state.my_name,
-      m_mobile: this.state.my_mobile,
-      m_birthday: this.state.my_birthday,
-      buy_record: this.state.my_buy_record,
-      shopping_cart: [
-        ...this.state.my_cart,
-        {
-          product_id: product_id,
-          product_name: product_name,
-          amount: amount,
-          id: cart_id,
-          price: price,
-          img: img,
-        },
-      ],
+      cart_data: {
+        m_mail: this.state.my_mail,
+        m_password: this.state.my_pswd,
+        m_name: this.state.my_name,
+        m_mobile: this.state.my_mobile,
+        m_birthday: this.state.my_birthday,
+        buy_record: JSON.stringify(this.state.my_buy_record),
+        shopping_cart: JSON.stringify([
+          ...this.state.my_cart,
+          {
+            product_id: product_id,
+            product_name: product_name,
+            amount: amount,
+            id: cart_id,
+            price: price,
+            img: img,
+          },
+        ]),
+      },
       id: this.state.my_id,
     };
     const action = addCartAction(cart_data);
