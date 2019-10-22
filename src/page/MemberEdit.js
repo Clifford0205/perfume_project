@@ -41,12 +41,9 @@ class MemberEdit extends React.Component {
     const edit_data = {
       edit_data: {
         m_mail: this.state.my_mail,
-        m_password: this.state.my_pswd,
         m_name: this.state.my_name,
         m_mobile: this.state.my_mobile,
         m_birthday: this.state.my_birthday,
-        shopping_cart: JSON.stringify(this.state.my_cart),
-        buy_record: JSON.stringify(this.state.my_buy_record),
       },
       id: this.state.my_id,
     };
@@ -112,13 +109,7 @@ class MemberEdit extends React.Component {
 
     const edit_pswd = {
       edit_pswd: {
-        m_mail: this.state.my_mail,
         m_password: this.state.new_password,
-        m_name: this.state.my_name,
-        m_mobile: this.state.my_mobile,
-        m_birthday: this.state.my_birthday,
-        shopping_cart: JSON.stringify(this.state.my_cart),
-        buy_record: JSON.stringify(this.state.my_buy_record),
       },
       id: this.state.my_id,
     };

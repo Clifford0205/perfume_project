@@ -78,7 +78,7 @@ function* getProductsInstate() {
   }
 }
 
-//拿到所有會員資料 改
+//拿到所有會員資料(對比email用) 改
 function* getAllMemberAction() {
   try {
     const response = yield fetch('http://localhost:5000/memberdata ', {
@@ -210,13 +210,8 @@ function* editMemberaction(newItem) {
   console.log(jsonObject);
 
   if (jsonObject.passed) {
-    localStorage.setItem('user', JSON.stringify(jsonObject.body));
-    // console.log(JSON.parse(localStorage.getItem('user')));
-    let this_user = JSON.parse(localStorage.getItem('user'));
-    // console.log(this_user);
+    yield getMemberInfo({ m_sid: member_id });
     yield alert('資料修改成功');
-    const action = checkLoginState(this_user);
-    yield put(action);
   } else {
     yield alert('資料沒有修改');
   }
@@ -241,13 +236,8 @@ function* editPasswordAction(newItem) {
   const jsonObject = yield response.json();
   console.log(jsonObject);
   if (jsonObject.passed) {
-    localStorage.setItem('user', JSON.stringify(jsonObject.body));
-    // console.log(JSON.parse(localStorage.getItem('user')));
-    let this_user = JSON.parse(localStorage.getItem('user'));
-    // console.log(this_user);
+    yield getMemberInfo({ m_sid: member_id });
     yield alert('密碼修改成功');
-    const action = checkLoginState(this_user);
-    yield put(action);
   } else {
     yield alert('資料沒有修改');
   }
@@ -326,29 +316,26 @@ function* addcartAction(newItem) {
   yield put(action);
 }
 
-//刪除購物車品項
-
+//刪除購物車品項 改
 function* deleteCartAction(newItem) {
   yield; // console.log(newItem.delItem.shopping_cart);
   const data = newItem.delItem.shopping_cart;
   const id = newItem.delItem.id;
-  const response = yield fetch('http://localhost:5555/memberdata/' + id, {
-    method: 'PATCH',
-    body: JSON.stringify(data),
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }),
-  });
+  const response = yield fetch(
+    'http://localhost:5000/memberdata/removecart/' + id,
+    {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }
+  );
   const jsonObject = yield response.json();
-  // console.log(jsonObject);
-  localStorage.setItem('user', JSON.stringify(jsonObject));
-  // console.log(JSON.parse(localStorage.getItem('user')));
-  let this_user = JSON.parse(localStorage.getItem('user'));
-  // console.log(this_user);
+  console.log(jsonObject);
+  yield getMemberInfo({ m_sid: id });
   yield alert('刪除成功');
-  const action = checkLoginState(this_user);
-  yield put(action);
 }
 
 //購物車到訂單

@@ -62,12 +62,6 @@ class ShoppingCart extends React.Component {
   };
 
   handleCancel = e => {
-    // let clickID =
-    //   [].indexOf.call(
-    //     e.target.parentNode.parentNode.children,
-    //     e.target.parentNode
-    //   ) + 1;
-
     //會員ID
     let member_id = this.state.my_id;
 
@@ -78,7 +72,7 @@ class ShoppingCart extends React.Component {
     let shopping_cart = this.state.my_cart.filter(item => item.id !== +clickID);
 
     let delItem = {
-      shopping_cart: { shopping_cart: shopping_cart },
+      shopping_cart: { shopping_cart: JSON.stringify(shopping_cart) },
       id: member_id,
     };
     const action = deleteCartAction(delItem);
