@@ -32,7 +32,7 @@ function* saveclientmessage(newItem) {
   // console.log(newItem.item);
   try {
     const data = newItem.item;
-    const response = yield fetch('http://localhost:5000/clientmessage', {
+    const response = yield fetch('http://localhost:5001/clientmessage', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({
@@ -55,7 +55,7 @@ function* saveclientmessage(newItem) {
 //拿到商品資料 改
 function* getProductsInstate() {
   try {
-    const response = yield fetch('http://localhost:5000/products ', {
+    const response = yield fetch('http://localhost:5001/products ', {
       method: 'GET',
       headers: new Headers({
         Accept: 'application/json',
@@ -80,7 +80,7 @@ function* getProductsInstate() {
 //拿到所有會員資料(對比email用) 改
 function* getAllMemberAction() {
   try {
-    const response = yield fetch('http://localhost:5000/memberdata ', {
+    const response = yield fetch('http://localhost:5001/memberdata ', {
       method: 'GET',
       headers: new Headers({
         Accept: 'application/json',
@@ -104,7 +104,7 @@ function* addMemberAction(newItem) {
   // console.log(newItem.m_data);
   try {
     const data = newItem.m_data;
-    const response = yield fetch('http://localhost:5000/memberdata', {
+    const response = yield fetch('http://localhost:5001/memberdata', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({
@@ -130,7 +130,7 @@ function* addMemberAction(newItem) {
 function* MemberLogin(newItem) {
   try {
     const data = newItem.login_data;
-    const response = yield fetch('http://localhost:5000/login', {
+    const response = yield fetch('http://localhost:5001/login', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({
@@ -166,7 +166,7 @@ function* getMemberInfo(m_sid) {
   // yield console.log(m_sid);
   try {
     const data = m_sid;
-    const response = yield fetch('http://localhost:5000/memberagain', {
+    const response = yield fetch('http://localhost:5001/memberagain', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({
@@ -195,7 +195,7 @@ function* editMemberaction(newItem) {
   // console.log(data);
 
   const response = yield fetch(
-    'http://localhost:5000/memberdata/edit/' + member_id,
+    'http://localhost:5001/memberdata/edit/' + member_id,
     {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -222,7 +222,7 @@ function* editPasswordAction(newItem) {
   const member_id = newItem.edit_pswd.id;
   const data = newItem.edit_pswd.edit_pswd;
   const response = yield fetch(
-    'http://localhost:5000/memberdata/password/' + member_id,
+    'http://localhost:5001/memberdata/password/' + member_id,
     {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -249,7 +249,7 @@ function* bigMessageAction(newItem) {
   // console.log(data);
   const ptid = newItem.big_message.product_id;
   const response = yield fetch(
-    'http://localhost:5000/products/bigmsg/' + ptid,
+    'http://localhost:5001/products/bigmsg/' + ptid,
     {
       method: 'PATCH',
       body: JSON.stringify(data),
@@ -275,7 +275,7 @@ function* littleMsg(newItem) {
 
   const ptid = newItem.little_message.product_id;
   const response = yield fetch(
-    'http://localhost:5000/products/littlemsg/' + ptid,
+    'http://localhost:5001/products/littlemsg/' + ptid,
     {
       method: 'PATCH',
       body: JSON.stringify(data),
@@ -296,7 +296,7 @@ function* addcartAction(newItem) {
   const mbid = newItem.cart_data.id;
   // console.log(data);
   const response = yield fetch(
-    'http://localhost:5000/memberdata/addcart/' + mbid,
+    'http://localhost:5001/memberdata/addcart/' + mbid,
     {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -321,7 +321,7 @@ function* deleteCartAction(newItem) {
   const data = newItem.delItem.shopping_cart;
   const id = newItem.delItem.id;
   const response = yield fetch(
-    'http://localhost:5000/memberdata/removecart/' + id,
+    'http://localhost:5001/memberdata/removecart/' + id,
     {
       method: 'PATCH',
       body: JSON.stringify(data),
@@ -344,7 +344,7 @@ function* addInOrderAction(newItem) {
   const id = newItem.data.id;
   yield; // console.log(data);
   const response = yield fetch(
-    'http://localhost:5000/memberdata/inorder/' + id,
+    'http://localhost:5001/memberdata/inorder/' + id,
     {
       method: 'PATCH',
       body: JSON.stringify(data),
