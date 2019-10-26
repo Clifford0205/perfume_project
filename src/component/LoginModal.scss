@@ -17,24 +17,54 @@
 }
 
 .LoginModal {
+    padding: 0 !important;
+
     .modal-dialog {
         max-width: 600px;
         margin: 11.75rem auto;
-    }
 
-    .modal-header {
-        position: relative;
-
-        .modal-title {
-            width: 100%;
-            text-align: center;
+        @include md {
+            max-width: 550px;
+            margin: 100px auto;
         }
 
-        .close {
-            position: absolute;
-            top: 35px;
-            right: 35px;
-            padding: 0;
+        .modal-content {
+
+            @include md {
+                width: 90%;
+                margin: 0 auto;
+            }
+
+            .modal-header {
+                position: relative;
+
+                .modal-title {
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .close {
+                    position: absolute;
+                    top: 35px;
+                    right: 35px;
+                    padding: 0;
+                }
+            }
+
+            .modal-body {
+                @include md {
+                    font-size: 0.85rem;
+                    padding: 0.5rem;
+                }
+
+                .form-control {
+                    @include md {
+                        height: 2rem;
+                    }
+                }
+            }
         }
     }
+
+
 }

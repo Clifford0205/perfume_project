@@ -181,6 +181,10 @@
                 transform: translate(0, 20px);
                 transition: 3s;
             }
+
+            .area {}
+
+
         }
 
 
@@ -227,6 +231,14 @@
                 transition: 3s;
             }
 
+            h2 {
+                @include md {
+                    font-size: 18pt;
+                    margin-bottom: 0;
+                    margin-top: 4rem;
+                }
+            }
+
             .product-area {
                 img {
                     width: 250px;
@@ -236,9 +248,17 @@
                     }
 
                     @include md {
-                        width: 150px;
+                        width: 140px;
                     }
 
+                }
+
+
+
+                p {
+                    @include md {
+                        margin: 0;
+                    }
                 }
 
                 a {
@@ -273,21 +293,14 @@
         .content {
             height: 100%;
 
-            .title {
-                background-color: #FFBC60;
-                border-radius: 3.5rem;
-            }
 
             .page5-title {
                 font-size: 25pt;
-
-                span {
-                    background-color: #FFBC60;
-                    border-radius: 3.5rem;
-                }
+                margin-bottom: 0;
 
                 @include md {
                     font-size: 18pt;
+                    margin-top: 3rem;
                 }
             }
 
@@ -296,6 +309,8 @@
                 height: 300px;
                 /* The height is 400 pixels */
                 width: 60%;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
 
                 /* The width is the width of the web page */
                 .googleMap {
@@ -304,6 +319,7 @@
 
                 @include md {
                     height: 150px;
+                    margin: 0;
                 }
 
             }

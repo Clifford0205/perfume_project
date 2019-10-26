@@ -33,21 +33,53 @@ class Pagination extends React.Component {
   //生命週期:state的改變
   componentDidUpdate() {
     var nowpage = this.state.currentPage;
-    $('.page-item').removeClass('noshow');
-    $('.page-item').each(function() {
-      if (
-        $(this)
-          .find('.page-link')
-          .text() >
-          nowpage + 3 ||
-        $(this)
-          .find('.page-link')
-          .text() <
-          nowpage - 3
-      ) {
-        $(this).addClass('noshow');
+    console.log(typeof nowpage);
+    let page_item = document.querySelectorAll('.page-item');
+    for (let i = 0; i < page_item.length; i++) {
+      page_item[i].classList.remove('noshow');
+      // console.log(page_item[i].childNodes[0].innerText);
+      let pageNum = page_item[i].childNodes[0].innerText;
+
+      console.log(page_item.length);
+      if (nowpage === 1 && pageNum > nowpage + 4) {
+        page_item[i].classList.add('noshow');
       }
-    });
+
+      if (nowpage === 2 && pageNum > nowpage + 3) {
+        page_item[i].classList.add('noshow');
+      }
+
+      if (nowpage === page_item.length && pageNum < nowpage - 4) {
+        page_item[i].classList.add('noshow');
+      }
+      if (nowpage === page_item.length - 1 && pageNum < nowpage - 3) {
+        page_item[i].classList.add('noshow');
+      }
+      if (
+        (nowpage !== 1 && nowpage !== 2 && pageNum > nowpage + 2) ||
+        (nowpage !== page_item.length &&
+          nowpage !== page_item.length - 1 &&
+          pageNum < nowpage - 2)
+      ) {
+        page_item[i].classList.add('noshow');
+      }
+    }
+    // $('.page-item').removeClass('noshow');
+    // $('.page-item').each(function() {
+    //   console.log($(this));
+    //   if (
+    //     $(this)
+    //       .find('.page-link')
+    //       .text() >
+    //       nowpage + 2 ||
+    //     $(this)
+    //       .find('.page-link')
+    //       .text() <
+    //       nowpage - 2
+    //   ) {
+    //     $(this).addClass('noshow');
+    //   }
+    // });
   }
 
   paginate = item => () => {

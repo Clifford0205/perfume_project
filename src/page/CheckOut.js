@@ -123,24 +123,24 @@ class ShoppingCart extends React.Component {
   };
 
   handleCancel = e => {
-    // let clickID =
-    //   [].indexOf.call(
-    //     e.target.parentNode.parentNode.children,
-    //     e.target.parentNode
-    //   ) + 1;
-
     //會員ID
     let member_id = this.state.my_id;
 
     //得到點擊欄位的id
-    let clickID = e.target.parentNode.dataset.id;
+    let clickID = e.target.parentNode.parentNode.dataset.id;
 
-    //點擊以外的留下，傳給API,+號為了轉成數字
+    // 點擊以外的留下，傳給API,+號為了轉成數字
     let shopping_cart = this.state.my_cart.filter(item => item.id !== +clickID);
+
+    console.log(shopping_cart);
     let delItem = {
-      shopping_cart: { shopping_cart: shopping_cart },
+      shopping_cart: {
+        shopping_cart: JSON.stringify(shopping_cart),
+      },
+
       id: member_id,
     };
+
     const action = deleteCartAction(delItem);
     store.dispatch(action);
   };
@@ -548,7 +548,7 @@ class ShoppingCart extends React.Component {
                                 key={index}
                                 value={item}
                                 disabled
-                                selected
+                                defaultValue
                               >
                                 {item}
                               </option>
@@ -578,7 +578,7 @@ class ShoppingCart extends React.Component {
                                 key={index}
                                 value={item}
                                 disabled
-                                selected
+                                defaultValue
                               >
                                 {item}
                               </option>
@@ -613,7 +613,7 @@ class ShoppingCart extends React.Component {
                     id=""
                     onChange={e => this.handlePayWay(e)}
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled defaultValue>
                       請選擇
                     </option>
                     <option value="cash">貨到付款</option>
@@ -677,7 +677,7 @@ class ShoppingCart extends React.Component {
                       onChange={e => this.handleValidMonth(e)}
                       value={this.state.valid_month}
                     >
-                      <option disabled selected value="">
+                      <option disabled defaultValue value="">
                         請選擇
                       </option>
                       <option>01</option>
@@ -700,7 +700,7 @@ class ShoppingCart extends React.Component {
                       onChange={e => this.handleValidYear(e)}
                       value={this.state.valid_year}
                     >
-                      <option disabled selected value="">
+                      <option disabled defaultValue value="">
                         請選擇
                       </option>
                       <option>2019</option>

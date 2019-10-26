@@ -89,8 +89,8 @@ class BuyRecord extends React.Component {
 
   render() {
     // console.log(this.state.my_buy_record);
-    console.log(this.state);
-    console.log(this.props.match.params.id);
+    // console.log(this.state);
+    // console.log(this.props.match.params.id);
 
     if (
       this.state.my_id !== +this.props.match.params.id &&

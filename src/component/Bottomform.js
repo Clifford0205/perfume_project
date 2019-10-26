@@ -64,10 +64,14 @@ export class Bottomform extends React.Component {
       <div className="Bottomform mx-auto">
         <Row className=" ">
           <Col md={6}>
-            <p>
+            <p className="long">
               {this.state.chinese
                 ? '要是有任何問題，請不用吝嗇，馬上寫下您寶貴的建議給我們，我們將馬上有專人聯繫您'
                 : "If you have any questions, please don't hesitate to write down your valuable suggestions and we will contact you immediately."}
+            </p>
+
+            <p className="short">
+              {this.state.chinese ? '留下資料' : 'Leave Message'}
             </p>
           </Col>
           <Col md={6}>

@@ -1,6 +1,48 @@
+@mixin lg {
+    @media (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (max-width: 576px) {
+        @content;
+    }
+}
+
 .Bottomform {
 
     width: 60%;
+
+    p {
+        margin: 0;
+    }
+
+
+
+    .long {
+        display: block;
+
+        @include md {
+            display: none;
+        }
+    }
+
+    .short {
+        display: none;
+
+        @include md {
+            display: block;
+        }
+    }
+
+
 
     input {
         border-radius: 3rem;

@@ -8,7 +8,6 @@ import { withRouter } from 'react-router-dom';
 
 import {
   InputChangeAction,
-  getAllmemberAction,
   memberRegisterAction,
 } from '../store/actionCreators.js';
 

@@ -87,7 +87,7 @@ class LandingPage extends React.Component {
                             <Carousel.Item>
                               <img
                                 className="d-block slider-img"
-                                src="https://shoplineimg.com/5cc80df915c071000101084d/5d146daccb574871584ba324/2000x.webp?source_format=jpg"
+                                src="/images/KV1.jpg"
                                 alt="First slide"
                               />
                               <Carousel.Caption>
@@ -102,7 +102,7 @@ class LandingPage extends React.Component {
                             <Carousel.Item>
                               <img
                                 className="d-block slider-img"
-                                src="https://shoplineimg.com/5cc80df915c071000101084d/5d146df1b0b0cf001a9f0ce2/2000x.webp?source_format=jpg"
+                                src="/images/KV2.jpg"
                                 alt="Third slide"
                               />
 
@@ -118,7 +118,7 @@ class LandingPage extends React.Component {
                             <Carousel.Item>
                               <img
                                 className="d-block slider-img"
-                                src="https://shoplineimg.com/5cc80df915c071000101084d/5d146dc480fd5b002915a6f2/2000x.webp?source_format=jpg"
+                                src="/images/KV3.jpg"
                                 alt="Third slide"
                               />
 
@@ -135,7 +135,7 @@ class LandingPage extends React.Component {
                             <Carousel.Item>
                               <img
                                 className="d-block slider-img"
-                                src="https://shoplineimg.com/5cc80df915c071000101084d/5d146ddac2f1e6002c7b9f93/2000x.webp?source_format=jpg"
+                                src="/images/KV4.jpg"
                                 alt="Third slide"
                               />
 
@@ -232,7 +232,7 @@ class LandingPage extends React.Component {
                               <Col md={6}>
                                 <h5>
                                   <img
-                                    src="/images/p3.webp"
+                                    src="/images/p33.webp"
                                     alt=""
                                     className="w-100"
                                   />
@@ -250,7 +250,7 @@ class LandingPage extends React.Component {
                   <Container fluid={true} className="product">
                     <Row className="content">
                       <Col className="align-self-center ">
-                        <h2 className="text-center page4-title transition text-center mt-5  ">
+                        <h2 className="text-center page4-title transition text-center   ">
                           {this.state.chinese ? '烏德之香' : 'THE HOUSE OF OUD'}
                         </h2>
                         <Row className="product-area">
@@ -370,10 +370,7 @@ class LandingPage extends React.Component {
                         <h2 className="text-center page5-title">
                           {this.state.chinese ? '聯絡我們' : 'CONTACT US'}
                         </h2>
-                        <div
-                          id="map"
-                          className="mx-auto mt-4 position-relative"
-                        >
+                        <div id="map" className="mx-auto  position-relative">
                           <MyGooglemap />
                         </div>
                         <Bottomform />

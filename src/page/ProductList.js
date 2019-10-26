@@ -101,8 +101,8 @@ class ProductList extends React.Component {
                 onClick={e => this.handleClassify(e)}
               ></div>
             </Col>
-            <Col xs={2}>
-              <div>
+            <Col xs={2} className="d-flex justify-content-center">
+              <div className="filter-pos">
                 <p
                   className="filter"
                   id="wood"
@@ -112,8 +112,8 @@ class ProductList extends React.Component {
                 </p>
               </div>
             </Col>
-            <Col xs={2}>
-              <div>
+            <Col xs={2} className="d-flex justify-content-center">
+              <div className="filter-pos">
                 <p
                   className="filter"
                   id="flower"
@@ -123,8 +123,8 @@ class ProductList extends React.Component {
                 </p>
               </div>
             </Col>
-            <Col xs={2}>
-              <div>
+            <Col xs={2} className="d-flex justify-content-center">
+              <div className="filter-pos">
                 <p
                   className="filter"
                   id="ocean"
@@ -134,8 +134,8 @@ class ProductList extends React.Component {
                 </p>
               </div>
             </Col>
-            <Col xs={2}>
-              <div>
+            <Col xs={2} className="d-flex justify-content-center">
+              <div className="filter-pos">
                 <p
                   className="filter"
                   id="tea"
@@ -145,8 +145,8 @@ class ProductList extends React.Component {
                 </p>
               </div>
             </Col>
-            <Col xs={2}>
-              <div>
+            <Col xs={2} className="d-flex justify-content-center">
+              <div className="filter-pos">
                 <p
                   className="filter"
                   id="fruit"

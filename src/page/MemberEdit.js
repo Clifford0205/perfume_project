@@ -14,20 +14,25 @@ import {
 class MemberEdit extends React.Component {
   constructor(props) {
     super(props);
+    this.mounted = false;
     this.state = store.getState();
     store.subscribe(this.handleStoreChange);
     // console.log(this.state);
   }
 
   handleStoreChange = () => {
-    this.setState(store.getState());
-    // // console.log('store change');
+    if (this.mounted) {
+      this.setState(store.getState());
+    }
   };
 
   //生命週期:一開始載入資料
   componentDidMount() {
-    // console.log(url_id);
-    // console.log(state_id);
+    this.mounted = true;
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   handleFormInputChange = e => {
@@ -117,7 +122,7 @@ class MemberEdit extends React.Component {
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     if (
       this.state.my_id !== +this.props.match.params.id &&
       this.state.my_id &&

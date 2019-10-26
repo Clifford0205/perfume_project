@@ -19,6 +19,14 @@
 
 .ProductList {
     .classification {
+        .filter-pos {
+            align-self: center;
+
+            @include md {
+                align-self: flex-start;
+            }
+        }
+
         p {
             display: inline-block;
             margin: 0;
@@ -34,6 +42,8 @@
 
         .all {
             background-image: url(/images/btm_all.svg);
+            background-position: center center;
+            margin: 0 auto;
             background-repeat: no-repeat;
             width: 60px;
             height: 60px;

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './page/LandingPage';
 import ProductDetail from './page/ProductDetail';
 import ProductList from './page/ProductList';
-import './Myapp.scss';
+import './App.scss';
 import MemberEdit from './page/MemberEdit';
 import ShoppingCart from './page/ShoppingCart';
 import CheckOut from './page/CheckOut';
@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Router>
-        <>
+        <div className="App">
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route path="/productlist" component={ProductList} />
@@ -23,7 +23,7 @@ function App() {
             <Route path="/member/checkout/:id" component={CheckOut} />
             <Route path="/member/buy_record/:id" component={BuyRecord} />
           </Switch>
-        </>
+        </div>
       </Router>
     </>
   );
