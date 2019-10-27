@@ -82,7 +82,7 @@ class ProductList extends React.Component {
         <MyNavbar />
 
         <section>
-          <img src="/images/egg.webp" alt="" className="w-100" />
+          <img src="/images/egg.jpg" alt="" className="w-100" />
         </section>
 
         <Container className="ProductList pb-5">

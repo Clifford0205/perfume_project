@@ -67,7 +67,10 @@ class ShoppingCart extends React.Component {
     for (let j = 0; j < Zone_data[index].地區.length; j++) {
       townops.push(Zone_data[index].地區[j]);
     }
-    const action = zoneChangeAction(townops);
+    let action = '';
+    action = zoneChangeAction(townops);
+    store.dispatch(action);
+    action = zoneSaveAction('請選擇地區', 'delivery_town');
     store.dispatch(action);
   };
 
@@ -258,8 +261,8 @@ class ShoppingCart extends React.Component {
     let recipient_road = this.state.recipient_road;
 
     if (
-      delivery_city.trim() === '' ||
-      delivery_town.trim() === '' ||
+      delivery_city === '請選擇城市' ||
+      delivery_town === '請選擇地區' ||
       recipient_road.trim() === ''
     ) {
       alert('請輸入完整地址');
@@ -351,7 +354,7 @@ class ShoppingCart extends React.Component {
           <MyNavbar />
           <Container className="CheckOut">
             <section>
-              <img src="/images/2000x.webp" alt="" className="w-100" />
+              <img src="/images/2000x.jpg" alt="" className="w-100" />
             </section>
             <div
               className="no-product mt-3"
@@ -533,6 +536,7 @@ class ShoppingCart extends React.Component {
 
                   <div className="row">
                     <Col md={4} className="mt-3">
+                      {/* 選擇城市 */}
                       <select
                         onChange={e => {
                           this.changeArea(e);
@@ -540,16 +544,12 @@ class ShoppingCart extends React.Component {
                         }}
                         name="delivery_city"
                         className="d-block mx-auto form-control"
+                        value={this.state.delivery_city}
                       >
                         {this.state.cityops.map((item, index) => {
                           if (index === 0) {
                             return (
-                              <option
-                                key={index}
-                                value={item}
-                                disabled
-                                defaultValue
-                              >
+                              <option key={index} value={item} defaultValue>
                                 {item}
                               </option>
                             );
@@ -564,22 +564,19 @@ class ShoppingCart extends React.Component {
                       </select>
                     </Col>
                     <Col md={4} className="mt-3">
+                      {/* 選擇地區 */}
                       <select
                         onChange={e => {
                           this.handleAreaState(e);
                         }}
                         name="delivery_town"
                         className="d-block mx-auto form-control"
+                        value={this.state.delivery_town}
                       >
                         {this.state.townops.map((item, index) => {
                           if (index === 0) {
                             return (
-                              <option
-                                key={index}
-                                value={item}
-                                disabled
-                                defaultValue
-                              >
+                              <option key={index} value={item} defaultValue>
                                 {item}
                               </option>
                             );
@@ -613,7 +610,7 @@ class ShoppingCart extends React.Component {
                     id=""
                     onChange={e => this.handlePayWay(e)}
                   >
-                    <option value="" disabled defaultValue>
+                    <option value="" defaultValue>
                       請選擇
                     </option>
                     <option value="cash">貨到付款</option>
@@ -677,7 +674,7 @@ class ShoppingCart extends React.Component {
                       onChange={e => this.handleValidMonth(e)}
                       value={this.state.valid_month}
                     >
-                      <option disabled defaultValue value="">
+                      <option defaultValue value="">
                         請選擇
                       </option>
                       <option>01</option>

@@ -135,7 +135,7 @@ class MemberEdit extends React.Component {
           <MyNavbar />
           <Container className="MemberEdit">
             <section>
-              <img src="/images/2000x.webp" alt="" className="w-100" />
+              <img src="/images/2000x.jpg" alt="" className="w-100" />
             </section>
             <Container className="pb-5">
               <h2 className="text-center">會員中心</h2>

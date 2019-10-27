@@ -104,7 +104,7 @@ class BuyRecord extends React.Component {
           <MyNavbar />
           <Container className="BuyRecord">
             <section>
-              <img src="/images/2000x.webp" alt="" className="w-100" />
+              <img src="/images/2000x.jpg" alt="" className="w-100" />
             </section>
             <Container className="pb-5">
               <h2 className="text-center">購買紀錄</h2>

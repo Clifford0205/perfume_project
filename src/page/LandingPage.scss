@@ -20,7 +20,8 @@
     background: url(/images/img_bg3.png);
     transition: 3s;
 
-    .one-page {
+    .section {
+        max-height: 100vh;
         height: 100vh;
     }
 
@@ -36,7 +37,7 @@
     }
 
     .theVision {
-        min-height: 100vh;
+        max-height: 100vh;
 
         .transition {
             transition: width 2s;
@@ -57,12 +58,13 @@
 
             .imgarea {
                 height: 100vh;
-
+                max-height: 100vh;
 
 
                 .carousel {
                     .carousel-caption {
                         bottom: 35px;
+                        max-height: 100vh;
                     }
 
                     .carousel-indicators {

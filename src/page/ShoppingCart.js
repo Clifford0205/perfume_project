@@ -103,7 +103,7 @@ class ShoppingCart extends React.Component {
           <MyNavbar />
           <Container className="ShoppingCart">
             <section>
-              <img src="/images/2000x.webp" alt="" className="w-100" />
+              <img src="/images/2000x.jpg" alt="" className="w-100" />
             </section>
             <Container className="pb-5">
               <h2 className="text-center">購物車和訂單紀錄</h2>

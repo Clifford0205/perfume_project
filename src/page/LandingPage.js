@@ -78,7 +78,7 @@ class LandingPage extends React.Component {
 
             return (
               <div id="fullpage-wrapper" className="LandingPage">
-                <div className="section section1">
+                <div className="section section1 firstPage">
                   <Container fluid={true} className="theVision">
                     <Row>
                       <Col className="first-col">
@@ -232,7 +232,7 @@ class LandingPage extends React.Component {
                               <Col md={6}>
                                 <h5>
                                   <img
-                                    src="/images/p33.webp"
+                                    src="/images/p33.jpg"
                                     alt=""
                                     className="w-100"
                                   />

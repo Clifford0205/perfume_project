@@ -132,6 +132,7 @@ export default (state = defaultState, action) => {
 
   //存取地區進入state
   if (action.type === ZONE_STATE) {
+    console.log(action);
     const newState = JSON.parse(JSON.stringify(state));
     for (var y in newState) {
       if (y === action.name) {

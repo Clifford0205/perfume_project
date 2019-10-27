@@ -114,7 +114,7 @@ class MyNavbar extends React.Component {
         <div className="MyNav">
           <div className="forpos">
             <Link to={'/'} className="logo">
-              <img src="/images/LOGO.webp" alt="" className="w-100" />
+              <img src="/images/LOGO.png" alt="" className="w-100" />
             </Link>
             <Container>
               <div className="my-navbar">

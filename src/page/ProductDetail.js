@@ -303,12 +303,12 @@ class ProductDetail extends React.Component {
         <MyNavbar />
         <div className="ProductDetail">
           <section className="bg-img">
-            <img src="/images/egg.webp" alt="" className="w-100" />
+            <img src="/images/egg.jpg" alt="" className="w-100" />
           </section>
           <Container className="top-area">
             <Row>
               <Col lg={8}>
-                <div className="d-flex">
+                <div className="d-flex justify-content-center">
                   <div className="gallary">
                     <ul className="ga-ul">
                       {theProductData.imglist.map(item => (
@@ -318,7 +318,7 @@ class ProductDetail extends React.Component {
                       ))}
                     </ul>
                   </div>
-                  <div className="big-img mx-auto">
+                  <div className="big-img ">
                     <p className="text-center">
                       <img
                         src={
