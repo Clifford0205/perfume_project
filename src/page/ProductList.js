@@ -51,6 +51,16 @@ class ProductList extends React.Component {
     store.dispatch(action);
   };
 
+  handleImgChange = (e, img1) => {
+    console.log(e.target);
+    e.target.setAttribute('src', img1);
+  };
+
+  handleOrigImg = (e, img0) => {
+    console.log(e.target);
+    e.target.setAttribute('src', img0);
+  };
+
   componentDidUpdate() {
     // console.log(this.state);
   }
@@ -168,6 +178,12 @@ class ProductList extends React.Component {
                       alt=""
                       width="100%"
                       className="linkimg"
+                      onMouseOver={e =>
+                        this.handleImgChange(e, item.imglist[1].img)
+                      }
+                      onMouseOut={e =>
+                        this.handleOrigImg(e, item.imglist[0].img)
+                      }
                     />
                     <h5 className="linktitle">
                       {this.state.chinese

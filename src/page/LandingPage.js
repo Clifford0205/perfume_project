@@ -206,7 +206,7 @@ class LandingPage extends React.Component {
                                 className="align-items-center justify-content-center d-flex"
                               >
                                 {this.state.chinese ? (
-                                  <p className="">
+                                  <p className="about-describe">
                                     嗅覺是唯一先反應後思考的感官 <br />
                                     在嗅聞某樣事物時 鼻子裡的氣味分子接收器
                                     <br />
@@ -215,7 +215,7 @@ class LandingPage extends React.Component {
                                     而那正是控制情緒 記憶與幸福感的區域 <br />
                                   </p>
                                 ) : (
-                                  <p className="">
+                                  <p className="about-describe">
                                     Smell is the only sensory that reacts first
                                     and then thinks <br />
                                     molecule receiver in the nose while sniffing
@@ -261,7 +261,8 @@ class LandingPage extends React.Component {
                           >
                             <Link
                               to={
-                                '/ProductDetail/' + this.state.productList[0].id
+                                '/ProductDetail/' +
+                                this.state.productList[0].p_sid
                               }
                             >
                               <img
@@ -286,7 +287,8 @@ class LandingPage extends React.Component {
                           >
                             <Link
                               to={
-                                '/ProductDetail/' + this.state.productList[1].id
+                                '/ProductDetail/' +
+                                this.state.productList[1].p_sid
                               }
                             >
                               <img
@@ -312,7 +314,8 @@ class LandingPage extends React.Component {
                           >
                             <Link
                               to={
-                                '/ProductDetail/' + this.state.productList[2].id
+                                '/ProductDetail/' +
+                                this.state.productList[2].p_sid
                               }
                             >
                               <img
@@ -338,7 +341,8 @@ class LandingPage extends React.Component {
                           >
                             <Link
                               to={
-                                '/ProductDetail/' + this.state.productList[3].id
+                                '/ProductDetail/' +
+                                this.state.productList[3].p_sid
                               }
                             >
                               <img

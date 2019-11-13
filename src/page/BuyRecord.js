@@ -112,7 +112,7 @@ class BuyRecord extends React.Component {
                 {this.state.my_buy_record.map(item => (
                   <li key={item.id} className="single-order">
                     <Row>
-                      <Col className="">
+                      <Col md={4} className="">
                         {item.product.map((item, index) => (
                           <div className="d-flex" key={index}>
                             <Link
@@ -131,7 +131,7 @@ class BuyRecord extends React.Component {
                         ))}
                       </Col>
 
-                      <Col className="">
+                      <Col md={4} className="recipient-info">
                         <div className="recipient_name">
                           收件人姓名:{item.recipient_name}
                         </div>
@@ -150,7 +150,7 @@ class BuyRecord extends React.Component {
                         </div>
                       </Col>
 
-                      <Col>
+                      <Col md={4} className="total-price">
                         <div className="">
                           <p>訂單總金額:{item.total}</p>
                         </div>

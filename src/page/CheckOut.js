@@ -313,7 +313,6 @@ class ShoppingCart extends React.Component {
     const data = {
       buy_record: {
         buy_record: JSON.stringify([
-          ...this.state.my_buy_record,
           {
             time: time,
             id: record_id,
@@ -329,6 +328,7 @@ class ShoppingCart extends React.Component {
             recipient_road: recipient_road,
             pay_way2: pay_way2,
           },
+          ...this.state.my_buy_record,
         ]),
         shopping_cart: '[]',
       },
